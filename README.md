@@ -9,11 +9,10 @@ The Bluetooth Module uses an "AT" command set to program it to connect to your s
 # TBS
 
 Information on the Bluetooth audio transmitter module is found here (along with ordering info)
+- https://www.aliexpress.com/item/33058710334.html
 
-https://www.aliexpress.com/item/33058710334.html
 Best information on the Bluetooth module I could find is here; need to translate from Chinese (see next link)
+- https://item.taobao.com/item.htm?spm=a21wu.12321156-tw.0.0.7e76d1c7xEOcFZ&id=570274835710
 
-https://item.taobao.com/item.htm?spm=a21wu.12321156-tw.0.0.7e76d1c7xEOcFZ&id=570274835710
 Some more usage info on the Bluetooth module, especially English information on controlling with serial AT commands
-
-https://www.electro-tech-online.com/threads/kcx_bt_emitter-low-cost-bluetooth-bt-audio-module.158156/
+- https://www.electro-tech-online.com/threads/kcx_bt_emitter-low-cost-bluetooth-bt-audio-module.158156/
