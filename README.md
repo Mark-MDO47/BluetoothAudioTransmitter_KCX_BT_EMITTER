@@ -8,7 +8,7 @@ The KCX_BT_EMITTER Bluetooth Audio Transmitter Module receives line-level (not s
 The Bluetooth Module uses an "AT" command set to program it to connect to your speaker and not others. Included in this repository is an Arduino sketch for an Arduino that is used to program the KCX_BT_EMITTER. This can be used to store information about your Bluetooth speakers and/or headsets that will stay in the KCX_BT_EMITTER even after power off/on; the KCX_BT_EMITTER will scan for the matching speakers/headphones and connect only to items in that list.
 
 The following document describes using this capability:
-- TBS
+- https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/master/ProgrammingArduino_SerialMonitor_SampleOutput.pdf
 
 Information on the Bluetooth audio transmitter module is found here (along with ordering info)
 - https://www.aliexpress.com/item/33058710334.html
