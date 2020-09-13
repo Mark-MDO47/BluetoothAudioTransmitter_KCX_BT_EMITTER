@@ -169,8 +169,8 @@ void setup() {
 void loop() {
 
   // testRx();
-  // testEcho();
-  testCmds();
+  testEcho();
+  // testCmds();
 
 } // end loop()
 
