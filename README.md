@@ -9,7 +9,7 @@ Note: These utilities were developed by me for the Rubber Band Gun (RBG) project
 
 ![alt text](https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/master/images/KCX-BT-EMITTER_PinFunction.png "Pin Function of KCX_BT_EMITTER")
 
-The KCX_BT_EMITTER Bluetooth Audio Transmitter Module receives line-level (not speaker-level) stereo audio in and transmits to a Bluetooth receiver (speaker, headphones, etc.). Be sure to connect the analog ground and do not connect analog ground to digital ground. Also due to latency in packetizing/depacketizing the Bluetooth audio, it is best to turn off any parallel wired speaker if using the Bluetooth audio.
+The KCX_BT_EMITTER Bluetooth Audio Transmitter Module receives line-level (not speaker-level) stereo audio in and transmits to a Bluetooth receiver (speaker, headphones, etc.). Be sure to connect the audio (analog) ground and do not connect audio ground to digital ground. Also due to latency in packetizing/depacketizing the Bluetooth audio, it is best to turn off any parallel wired speaker if using the Bluetooth audio.
 
 The Bluetooth Module uses an "AT" command set to program it to connect to your speaker and not others. Included in this repository is an Arduino sketch for an Arduino that is used to program the KCX_BT_EMITTER. This can be used to store information about your Bluetooth speakers and/or headsets that will stay in the KCX_BT_EMITTER even after power off/on; the KCX_BT_EMITTER will scan for the matching speakers/headphones and connect only to items in that list.
 
