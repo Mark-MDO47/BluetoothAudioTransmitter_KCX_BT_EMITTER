@@ -15,6 +15,10 @@ This chip works great! It is not the very latest Bluetooth spec so it doesn't wo
 
 This Bluetooth Module uses an "AT" command set to program it to connect to your speaker and not others. Included in this repository is Arduino code (ProgrammingArduino.ino) that is used to program the KCX_BT_EMITTER. This can be used to store information about your Bluetooth speakers and/or headsets that will stay in the KCX_BT_EMITTER even after power off/on; the KCX_BT_EMITTER will scan for the matching speakers/headphones and connect only to items in that list.
 
+Note that the KCX_BT_EMITTER expects 5V inputs for the serial port. I have heard of problems when trying to use an ESP32 as the programming Arduino. The code itself should work on an ESP32, but the ESP32 boards I know of have 3.5 V outputs. As the first document below says: "The Programming Arduino should be a type of Arduino that uses 5 Volt interfaces. For example, an Arduino Uno or an Arduino Nano Classic."
+
+That is why I used a cheap Arduino Uno or Arduino Nano clone, which seems to me to be the simplest. Alternatively (although I have not tried this), you could potentially use the ESP32 by passing the serial transmit to KCX_BT_EMITTER signal through a 3.5 V to 5 V buffer driver and vice-versa for the return signal. If I was doing this alternative method, I would be sure also to provide 5 V power to the KCX_BT_EMITTER.
+
 The following document describes using this capability:
 - https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/master/ProgrammingArduino_SerialMonitor_SampleOutput.pdf
 
