@@ -1,4 +1,5 @@
 # BluetoothAudioTransmitter_KCX_BT_EMITTER
+# This is the KCX_BT_EMITTER_V1.1 branch
 Utilities to help program the KCX_BT_EMITTER module. Collected here to make them easier to find.
 
 ## Go to the branch for the firmware version of KCX_BT_EMITTER: KCX_BT_EMITTER_V1.1 or KCX_BT_EMITTER_V1.7
