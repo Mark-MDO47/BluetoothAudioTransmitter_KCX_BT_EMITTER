@@ -10,7 +10,7 @@ There is now a version V1.7 of the KCX_BT_EMITTER and Holger Pandel made some ch
 
 Holger kindly did a pull request to alert me to this update, and I will merge that code in.
 
-There are now (or will be soon) two branches to this repo:
+There are now two branches to this repo:
 - https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/tree/KCX_BT_EMITTER_V1.1 - works with firmware V1.1 and based on everything from before the pull request
 - https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/tree/KCX_BT_EMITTER_V1.7 - works with firmware V1.7, based on Holger's code, and will be under development
 
