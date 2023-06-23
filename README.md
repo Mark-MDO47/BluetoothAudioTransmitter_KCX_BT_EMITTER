@@ -21,11 +21,18 @@ Note: The V1.1 utilities were originally developed by me for the Rubber Band Gun
 There is a start on V1.7 utilities. The following have been updated to some extent:
 - ProgrammingArduino.ino - just enough changes to make it work with V1.7. It doesn't yet access all the V1.7 firmware capabilities and doesn't have the V1.1 firmware AT+SCAN command.
 
-![alt text](https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/master/images/KCX_BT_Board_IMG_1351.png "Front side of KCX_BT_EMITTER")
+The KCX_BT_EMITTER V1.7 looks like this
 
-![alt text](https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/master/images/KCX_BT_board_back_IMG_1357.png "Back side of KCX_BT_EMITTER")
+![alt text](https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/V1.7_001/images/KCX_BT_EMITTER_1.7_front.png "Front side of KCX_BT_EMITTER V1.7")
+![alt text](https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/V1.7_001/images/KCX_BT_EMITTER_1.7_back.png "Back side of KCX_BT_EMITTER V1.7")
 
-![alt text](https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/master/images/KCX-BT-EMITTER_PinFunction.png "Pin Function of KCX_BT_EMITTER")
+The KCX_BT_EMITTER V1.1 looks like this
+
+![alt text](https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/master/images/KCX_BT_Board_IMG_1351.png "Front side of KCX_BT_EMITTER V1.1")
+
+![alt text](https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/master/images/KCX_BT_board_back_IMG_1357.png "Back side of KCX_BT_EMITTER V1.1")
+
+![alt text](https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/master/images/KCX-BT-EMITTER_PinFunction.png "Pin Function of KCX_BT_EMITTER V1.1")
 
 The KCX_BT_EMITTER Bluetooth Audio Transmitter Module receives line-level (not speaker-level) stereo audio in and transmits to a Bluetooth receiver (speaker, headphones, etc.). Be sure to connect the audio (analog) ground and do not connect audio ground to digital ground. Also due to latency in packetizing/depacketizing the Bluetooth audio, it is best to turn off any parallel wired speaker if using the Bluetooth audio at the same time.
 
