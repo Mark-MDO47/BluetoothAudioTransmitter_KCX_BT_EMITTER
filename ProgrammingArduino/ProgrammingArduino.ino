@@ -21,26 +21,8 @@
 
 //////////////////////////////////////////////////////////////////////////////////////
 // To do this programming:
-//   Connect the Programming Arduino (see below)
-//
-//   On Rubber Band Gun (RBG)
-//     Power on RBG
-//   On the separate programming Arduino (using +5V interfaces)
-//     Connect programming Arduino to USB for PC running the Arduino software
-//     Upload the sketch from this file into the programming Arduino
-//     Open Serial Monitor by selecting menu "Tools" -> "Serial Monitor" and follow instructions
-//        After each selected step, wait for the string "--- KCX_BT_EMITTER PROGRAMMING STEP COMPLETE ---"
-//     Disconnect programming Arduino from USB for PC running the Arduino software
-//
-//   Disconnect the Programming Arduino (see below)
-//////////////////////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////////////////////
-// To connect the Programming Arduino
-//   On Rubber Band Gun (RBG)
-//     Power off RBG
-//     Remove the clear cover on the handle of the RBG
-//     Inside the handle, find the female jumper connectors for the KCX_BT_EMITTER chip (near front of handle)
+//   With power off:
+//     Find the female jumper connectors for the KCX_BT_EMITTER chip
 //          label      color of wire
 //          GND        BLACK
 //          2 RX       GREEN
@@ -53,21 +35,33 @@
 //          2 RX       GREEN  (Arduino TX)
 //          9 TX       YELLOW (Arduino RX)
 //     Connect the programming Arduino jumper wires to the RBG jumper wires using color as the guide.
+//   On your KCX_BT_EMITTER part
+//     Power on KCX_BT_EMITTER
+//   On the separate programming Arduino (using +5V interfaces)
+//     Connect programming Arduino to USB for PC running the Arduino software
+//     Upload the sketch from this file into the programming Arduino
+//     Open Serial Monitor by selecting menu "Tools" -> "Serial Monitor" and follow instructions
+//        After each selected step, wait for the string "--- KCX_BT_EMITTER PROGRAMMING STEP COMPLETE ---"
+//     Disconnect programming Arduino from USB for PC running the Arduino software
+//
+//   Disconnect the Programming Arduino (see below)
 //////////////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////////////////
 // To disconnect the Programming Arduino
 //   Ensure that programming Arduino is disconnected from USB for PC running the Arduino software
-//   On Rubber Band Gun (RBG)
-//     Power off RBG
+//   On your KCX_BT_EMITTER part
+//     Power off the KCX_BT_EMITTER
 //   On separate programming Arduino (using +5V interfaces)
 //     Disconnect the programming Arduino jumper wires from the RBG jumper wires
-//   On Rubber Band Gun (RBG)
-//     Store the jumper connectors safely in the handle and attach the clear cover on the handle of the RBG
+//   On your KCX_BT_EMITTER part
+//     Store the jumper connectors safely
 //////////////////////////////////////////////////////////////////////////////////////
 
 
-
+//////////////////////////////////////////////////////////////////////////////////////
+// This version for module KCX_BT_EMITTER v1.1
+//////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -192,9 +186,9 @@ void setup() {
     ; // wait for serial port to connect. Needed for native USB port only
   }
   Serial.println();
-  Serial.print("Bluetooth Programming Arduino init...");
+  Serial.print(F("Bluetooth Programming Arduino init..."));
   myBlueSerial.begin(9600); // this is control for Bluetooth module (KCX_BT_EMITTER)
-  Serial.println(" completed!");
+  Serial.println(F(" completed!"));
 
 }  // end setup()
 
@@ -203,12 +197,12 @@ void loop() {
 
   if (0 == menuPrinted) {
     menuPrinted = 1;
-    Serial.println("");
-    Serial.println("   1 - Scan for Bluetooth receiver devices (such as speaker, headphones, etc.)");
-    Serial.println("   2 - Display stored auto-connect Bluetooth receiver devices");
-    Serial.println("   3 - Add one auto-connect Bluetooth receiver device to storage");
-    Serial.println("   4 - Delete all auto-connect Bluetooth receiver devices from storage");
-    Serial.print("==> ");
+    Serial.println(F(""));
+    Serial.println(F("   1 - Scan for Bluetooth receiver devices (such as speaker, headphones, etc.)"));
+    Serial.println(F("   2 - Display stored auto-connect Bluetooth receiver devices"));
+    Serial.println(F("   3 - Add one auto-connect Bluetooth receiver device to storage"));
+    Serial.println(F("   4 - Delete all auto-connect Bluetooth receiver devices from storage"));
+    Serial.print(F("==> "));
   }
 
   if (Serial.available()) {
@@ -217,7 +211,7 @@ void loop() {
     menuPrinted = 0;
     myChoice = getSerial_uint8_t();
     if ((0 == myChoice) || (myChoice > 4)) {
-      Serial.println("ERROR - choice must be 1 through 4");
+      Serial.println(F("ERROR - choice must be 1 through 4"));
     } else {
       Serial.println(menuOptions[myChoice-1]);
       processCommand(myChoice);
@@ -259,8 +253,8 @@ void processCommand(uint8_t theChoice) {
         loopReportBlueCom();
       } else {
         reportBlueCom();
-        Serial.println("");
-        Serial.println("User aborted storing MAC address for the Bluetooth speaker or headphones\n");
+        Serial.println(F(""));
+        Serial.println(F("User aborted storing MAC address for the Bluetooth speaker or headphones\n"));
       }
       break;
     case 4: // 4 - Delete all auto-connect Bluetooth receiver devices from storage");
@@ -268,7 +262,7 @@ void processCommand(uint8_t theChoice) {
       loopReportBlueCom();
       break;
   } // end switch()
-  Serial.println("\n--- KCX_BT_EMITTER PROGRAMMING STEP COMPLETE ---");
+  Serial.println(F("\n--- KCX_BT_EMITTER PROGRAMMING STEP COMPLETE ---"));
 } // end processCommand()
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -282,15 +276,15 @@ uint8_t buildADDLINKADD(char * cmdAddr, uint16_t cmdMaxLen) {
   uint8_t myNumChars = 0;
   uint8_t myStart = 0;
   char const * zeroFill = "000000000000";
-  Serial.println("");
-  Serial.println("Enter the unique MAC address for the Bluetooth speaker or headphones; it starts with 0x");
-  Serial.println("    upper or lower case does not matter; maximum of 12 characters after the 0x");
-  Serial.println("To abort adding an auto-connect Bluetooth receiver device to storage, just enter an empty line");
-  Serial.print("==> ");
+  Serial.println(F(""));
+  Serial.println(F("Enter the unique MAC address for the Bluetooth speaker or headphones; it starts with 0x"));
+  Serial.println(F("    upper or lower case does not matter; maximum of 12 characters after the 0x"));
+  Serial.println(F("To abort adding an auto-connect Bluetooth receiver device to storage, just enter an empty line"));
+  Serial.print(F("==> "));
   while (!Serial.available()) {
     ; // wait
   }
-  Serial.println(" ");
+  Serial.println(F(" "));
   // reportBlueCom();
   myNumChars = getSerial_chars();
   if (0 == myNumChars) {
@@ -301,31 +295,31 @@ uint8_t buildADDLINKADD(char * cmdAddr, uint16_t cmdMaxLen) {
   }
   myNumChars -= myStart;
   if (DEBUG_SERIAL_IN) {
-    Serial.print("   input string |");
+    Serial.print(F("   input string |"));
     Serial.print(inBytes);
-    Serial.print("| myStart ");
+    Serial.print(F("| myStart "));
     Serial.print(myStart);
-    Serial.print(" myNumChars ");
+    Serial.print(F(" myNumChars "));
     Serial.println(myNumChars);
   } // end if (DEBUG_SERIAL_IN)
   if (myNumChars > 12) {
-    Serial.println("Abort - more than 12 characters");
+    Serial.println(F("Abort - more than 12 characters"));
     return(0); // abort
   }
   for (int j = myStart; (j < (myNumChars+myStart)) && (0 != inBytes[j]); j++) {
     if (0 == isxdigit(inBytes[j])) {
-      Serial.print("Abort - non-hex digit: ");
+      Serial.print(F("Abort - non-hex digit: "));
       Serial.print(inBytes[j]);
-      Serial.print(" j ");
+      Serial.print(F(" j "));
       Serial.println(j);
       return(0); // abort
     }
     myLowerCase[j] = tolower(inBytes[j]);
   }
   myLowerCase[myNumChars+myStart] = 0;
-  Serial.print("\nYour entry \"");
+  Serial.print(F("\nYour entry \""));
   Serial.print(inBytes);
-  Serial.println("\" was accepted");
+  Serial.println(F("\" was accepted"));
   strcpy(cmdAddr, cmd_ADDLINKADD);
   strcat(cmdAddr, &zeroFill[myNumChars]);
   strcat(cmdAddr, &myLowerCase[myStart]);
@@ -339,27 +333,27 @@ uint8_t buildADDLINKADD(char * cmdAddr, uint16_t cmdMaxLen) {
 uint8_t buildADDLINKNAME(char * cmdAddr, uint16_t cmdMaxLen) {
   uint8_t myNumChars = 0;
   char const * zeroFill = "000000000000";
-  Serial.println("");
-  Serial.println("Enter the name you choose for this device; it is OK to place spaces between words");
-  Serial.println("    maximum of 20 characters total");
-  Serial.println("To abort adding an auto-connect Bluetooth receiver device to storage, just enter an empty line");
-  Serial.print("==> ");
+  Serial.println(F(""));
+  Serial.println(F("Enter the name you choose for this device; it is OK to place spaces between words"));
+  Serial.println(F("    maximum of 20 characters total"));
+  Serial.println(F("To abort adding an auto-connect Bluetooth receiver device to storage, just enter an empty line"));
+  Serial.print(F("==> "));
   while (!Serial.available()) {
     ; // wait
   }
-  Serial.println(" ");
+  Serial.println(F(" "));
   // reportBlueCom();
   myNumChars = getSerial_chars();
   if (0 == myNumChars) {
     return(0); // abort
   }
   if (myNumChars > 20) {
-    Serial.println("Abort - more than 20 characters");
+    Serial.println(F("Abort - more than 20 characters"));
     return(0); // abort
   }
-  Serial.print("\nYour entry \"");
+  Serial.print(F("\nYour entry \""));
   Serial.print(inBytes);
-  Serial.println("\" was accepted");
+  Serial.println(F("\" was accepted"));
   strcpy(cmdAddr, cmd_ADDLINKNAME);
   strcat(cmdAddr, inBytes);
   return(1); // successful command build
@@ -383,22 +377,22 @@ uint8_t getSerial_chars() {
   while (Serial.available()) {
     myChar = Serial.read();
     if (DEBUG_SERIAL_IN) {
-      Serial.print("\n  getSerial_chars got myChar 0x");
+      Serial.print(F("\n  getSerial_chars got myChar 0x"));
       Serial.print(myChar, HEX);
     } // end if(DEBUG_SERIAL_IN)
     if (((int) myChar) >= 0x20) { // if it is space or higher
-      if (DEBUG_SERIAL_IN) { Serial.print(" >= 0x20 "); }
+      if (DEBUG_SERIAL_IN) { Serial.print(F(" >= 0x20 ")); }
       if ((idx+2) <= NUMOF(inBytes)) {
         inBytes[idx++] = myChar;
         if (DEBUG_SERIAL_IN) {
-          Serial.print("count of inBytes #");
+          Serial.print(F("count of inBytes #"));
           Serial.println(idx);
         } // end if(DEBUG_SERIAL_IN)
       } else {
         if (DEBUG_SERIAL_IN) {
-          Serial.print(" not stored; idx ");
+          Serial.print(F(" not stored; idx "));
           Serial.print(idx);
-          Serial.print(" not stored; NUMOF(inBytes) ");
+          Serial.print(F(" not stored; NUMOF(inBytes) "));
           Serial.println(NUMOF(inBytes));
         } // end if(DEBUG_SERIAL_IN)
       }
@@ -406,7 +400,7 @@ uint8_t getSerial_chars() {
     } else {
       delay(5);
         if (DEBUG_SERIAL_IN) {
-          Serial.print(" --- not stored! Count of inBytes #");
+          Serial.print(F(" --- not stored! Count of inBytes #"));
           Serial.println(idx);
         } // end if(DEBUG_SERIAL_IN)
       while (Serial.available()) {
@@ -419,13 +413,13 @@ uint8_t getSerial_chars() {
 
   inBytes[idx] = 0;
   if (DEBUG_SERIAL_IN) {
-    Serial.print("\n  getSerial_chars idx ");
+    Serial.print(F("\n  getSerial_chars idx "));
     Serial.print(idx);
-    Serial.print(" inBytes[idx] 0x");
+    Serial.print(F(" inBytes[idx] 0x"));
     Serial.print(inBytes[idx], HEX);
-    Serial.print(" inBytes |");
+    Serial.print(F(" inBytes |"));
     Serial.print(inBytes);
-    Serial.println("|");
+    Serial.println(F("|"));
   } // end if(DEBUG_SERIAL_IN)
   return(idx);
 } // end getSerial_chars()
@@ -437,9 +431,9 @@ uint8_t getSerial_chars() {
 uint8_t getSerial_uint8_t() {
   getSerial_chars();
   if (DEBUG_SERIAL_IN) {
-    Serial.print("\n  getSerial_uint8_t inBytes[0] 0x");
+    Serial.print(F("\n  getSerial_uint8_t inBytes[0] 0x"));
     Serial.print(inBytes[0], HEX);
-    Serial.print(" converted to ");
+    Serial.print(F(" converted to "));
     Serial.println(uint8_t (inBytes[0]-0x30), HEX);
   } // end if(DEBUG_SERIAL_IN)
   return(uint8_t (inBytes[0]-0x30)); // subtract ASCII 0
@@ -481,14 +475,14 @@ void testEcho() {
   if (idx > 0) { // if anything to send to Bluetooth chip
     // display the input
     for (odx = 0; odx < idx; odx++) {
-      Serial.print("char 0x");
+      Serial.print(F("char 0x"));
       Serial.print((int) inBytes[odx], HEX);
-      Serial.print(" ");
+      Serial.print(F(" "));
       Serial.println(inBytes[odx]);
       // printf("\neol char 0x%02X %c\n", (int) inBytes[odx], inBytes[odx]);
     }
     for (odx = 0; odx < edx; odx++) {
-      Serial.print("\neol char 0x");
+      Serial.print(F("\neol char 0x"));
       Serial.println((int) eolBytes[odx], HEX);
       // printf("\neol char 0x%02X\n", (int) eolBytes[odx]);
     }
@@ -513,10 +507,10 @@ void testEcho() {
 void sendBlueCmds(const char * cmdArray[], const uint8_t numCmds) {
 
   for (int cmdIdx = 0; cmdIdx < numCmds; cmdIdx += 1) {
-    Serial.println("");
-    Serial.print("--CMD ");
+    Serial.println(F(""));
+    Serial.print(F("--CMD "));
     Serial.print(cmdIdx);
-    Serial.print(" ");
+    Serial.print(F(" "));
     Serial.println(cmdArray[cmdIdx]);
     sendBlueCmd((char *) cmdArray[cmdIdx]);
   }
