@@ -17,7 +17,9 @@ There are now two branches to this repo:
 My V1.7 parts are expected to arrive in the middle of July 2023 so in the meantime I won't be able to experiment much with the KCX_BT_EMITTER_V1.7 branch; please bear with me. 
 
 ## Description
-Note: These utilities were originally developed by me for the Rubber Band Gun (RBG) project https://github.com/Mark-MDO47/RubberBandGun
+Note: The V1.1 utilities were originally developed by me for the Rubber Band Gun (RBG) project https://github.com/Mark-MDO47/RubberBandGun
+There is a start on V1.7 utilities. The following have been updated to some extent:
+- ProgrammingArduino.ino - just enough changes to make it work with V1.7. It doesn't yet access all the V1.7 firmware capabilities and doesn't have the V1.1 firmware AT+SCAN command.
 
 ![alt text](https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/master/images/KCX_BT_Board_IMG_1351.png "Front side of KCX_BT_EMITTER")
 
