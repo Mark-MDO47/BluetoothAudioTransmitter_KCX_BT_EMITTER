@@ -1,15 +1,20 @@
 // Author: Mark Olson 2020-09-03
+//
+// originally written for KCX_BT_EMITTER firmware V1.1 for
+//   Rubber Band Gun - https://github.com/Mark-MDO47/RubberBandGun
+//   RBG - A high-tech imagining of the rubber band gun
+//
+// updated 2023-06 by Holger Pandel for KCX_BT_EMITTER firmware V1.7 in https://github.com/pandel/BluetoothAudioTransmitter_KCX_BT_EMITTER/tree/v1.7
+// further updates 2023-06 by Mark Olson
+//
 
-// Rubber Band Gun - https://github.com/Mark-MDO47/RubberBandGun
-// RBG - A high-tech imagining of the rubber band gun
-
-// The purpose of ProgrammingArduino.ino is to program the KCX_BT_EMITTER Bluetooth module to auto-connect
+// The (original) purpose of ProgrammingArduino.ino is to program the KCX_BT_EMITTER Bluetooth module to auto-connect
 //     to a specific set of bluetooth speakers, headphones, etc.  Once this is done, the list will be retained
 //     by the Bluetooth module and the Programming Arduino can be disconnected.
 // The KCX_BT_EMITTER module (and some information on it) can be found here: https://www.aliexpress.com/item/33058710334.html
 
 // When running the sketch, you can select steps in any order as follows:
-//     1. Scan for Bluetooth receiver devices (such as speaker, headphones, etc.)
+//     1. Pair with Bluetooth receiver devices (such as speaker, headphones, etc.)
 //     2. Display stored auto-connect Bluetooth receiver devices
 //     3. Add one auto-connect Bluetooth receiver devices to storage
 //     4. Delete all auto-connect Bluetooth receiver devices from storage
@@ -171,7 +176,7 @@ char const *cmd_GMR = "AT+GMR?";
 char const *cmd_BAUD = "AT+BAUD?";
 char const *cmd_STATUS = "AT+STATUS?";
 char const *cmd_DISCON = "AT+DISCON";
-char const *cmd_SCAN = "AT+PAIR";
+char const *cmd_PAIR = "AT+PAIR";
 char const *cmd_ADDLINKADD = "AT+ADDLINKADD=0x";  // NOTE: must be exactly 12 characters for hex string
 char const *cmd_ADDLINKNAME = "AT+ADDLINKNAME=";
 char const *cmd_VMLINK = "AT+VMLINK?";
@@ -183,7 +188,7 @@ char cmd_bld_ADDLINKNAME[64];  // must build these in RAM from user input
 
 #define CMD_COUNT 7
 
-char const *cmdsScan[] = { cmd_AT, cmd_REST, cmd_AT, cmd_SCAN };
+char const *cmdsPair[] = { cmd_AT, cmd_REST, cmd_AT, cmd_PAIR };
 char const *cmdsDispRAM[] = { cmd_AT, cmd_VMLINK };
 char const *cmdsStatus[] = { cmd_AT, cmd_GMR, cmd_BAUD, cmd_STATUS };
 char const *cmdsAddRAM[] = { cmd_AT, cmd_DISCON, cmd_VMLINK, cmd_bld_ADDLINKADD, cmd_bld_ADDLINKNAME, cmd_REST, cmd_AT, cmd_VMLINK };
@@ -191,7 +196,7 @@ char const *cmdsClearRAM[] = { cmd_AT, cmd_DISCON, cmd_DELVMLINK, cmd_REST, cmd_
 char const *cmdsDiscon[] = { cmd_AT, cmd_DISCON };
 char const *cmdsPowerOff[] = { cmd_AT, cmd_PWROFF };
 
-char const *menuOptions[CMD_COUNT] = { "\n1=SCAN", "\n2=DISPLAY", "\n3=ADD", "\n4=DELETE ALL", "\n5=STATUS", "\n6=Disconnect", "\n7=PowerOff module" };
+char const *menuOptions[CMD_COUNT] = { "\n1=PAIR", "\n2=DISPLAY", "\n3=ADD", "\n4=DELETE ALL", "\n5=STATUS", "\n6=Disconnect", "\n7=PowerOff module" };
 
 void setup() {
 
@@ -212,7 +217,7 @@ void loop() {
   if (0 == menuPrinted) {
     menuPrinted = 1;
     Serial.println("");
-    Serial.println("   1 - Scan for Bluetooth receiver devices (such as speaker, headphones, etc.)");
+    Serial.println("   1 - Pair with Bluetooth receiver devices (such as speaker, headphones, etc.)");
     Serial.println("   2 - Display stored auto-connect Bluetooth receiver devices");
     Serial.println("   3 - Add one auto-connect Bluetooth receiver device to storage");
     Serial.println("   4 - Delete all auto-connect Bluetooth receiver devices from storage");
@@ -250,8 +255,8 @@ void processCommand(uint8_t theChoice) {
 
   reportBlueCom();
   switch (theChoice) {
-    case 1:  // 1 - Scan for Bluetooth receiver devices (such as speaker, headphones, etc.)");
-      sendBlueCmds(cmdsScan, (uint8_t)NUMOF(cmdsScan));
+    case 1:  // 1 - Pair with Bluetooth receiver devices (such as speaker, headphones, etc.)");
+      sendBlueCmds(cmdsPair, (uint8_t)NUMOF(cmdsPair));
       // need to hang around a little more
       loopReportBlueCom();
       break;
