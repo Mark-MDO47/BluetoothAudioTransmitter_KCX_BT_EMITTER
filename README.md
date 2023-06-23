@@ -17,7 +17,13 @@ There are now two branches to this repo:
 My V1.7 parts are expected to arrive in the middle of July 2023 so in the meantime I won't be able to experiment much with the KCX_BT_EMITTER_V1.7 branch; please bear with me. 
 
 ## Description
-Note: These utilities were originally developed by me for the Rubber Band Gun (RBG) project https://github.com/Mark-MDO47/RubberBandGun
+Note: These utilities were originally developed by me for the Rubber Band Gun (RBG) project https://github.com/Mark-MDO47/RubberBandGun\
+
+The text below is currently for firmware version V1.1; working now on updates for V1.7.
+
+It took me a while to find sources for the V1.7 version. Here are two sources I found.
+- https://store.siqma.com/kcx-bt-emitter.html
+- https://www.aliexpress.us/item/3256805363984973.html
 
 ![alt text](https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/master/images/KCX_BT_Board_IMG_1351.png "Front side of KCX_BT_EMITTER")
 
