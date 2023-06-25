@@ -17,6 +17,8 @@ There are now two branches to this repo:
 My V1.7 parts are expected to arrive in the middle of July 2023 so in the meantime I won't be able to experiment much with the KCX_BT_EMITTER_V1.7 branch; please bear with me. 
 
 ## Description
+Note: These utilities were originally developed by me for the Rubber Band Gun (RBG) project https://github.com/Mark-MDO47/RubberBandGun
+
 Note: The V1.1 utilities were originally developed by me for the Rubber Band Gun (RBG) project https://github.com/Mark-MDO47/RubberBandGun
 There is a start on V1.7 utilities. The following have been updated to some extent:
 - ProgrammingArduino.ino - just enough changes to make it work with V1.7. It doesn't yet access all the V1.7 firmware capabilities and doesn't have the V1.1 firmware AT+SCAN command.
@@ -24,6 +26,12 @@ There is a start on V1.7 utilities. The following have been updated to some exte
 The KCX_BT_EMITTER V1.7 looks like this
 
 <img src="https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/V1.7_001/images/KCX_BT_EMITTER_1.7_front.png" width="300" alt="aliexpress.com picture of KCX BT EMITTER version 1.7 Front Side"> <img src="https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/V1.7_001/images/KCX_BT_EMITTER_1.7_back.png" width="300" alt="aliexpress.com picture of KCX BT EMITTER version 1.7 Back Side">
+
+It took me a while to find sources for the V1.7 version. Here are two sources I found.
+- https://store.siqma.com/kcx-bt-emitter.html
+- https://www.aliexpress.us/item/3256805363984973.html
+
+The text below is currently for firmware version V1.1; working now on updates for V1.7.
 
 The KCX_BT_EMITTER V1.1 looks like this
 
