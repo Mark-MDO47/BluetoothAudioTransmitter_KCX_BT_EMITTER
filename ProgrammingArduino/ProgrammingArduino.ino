@@ -150,8 +150,8 @@
 // NOTE that Serial.read() from Arduino serial monitor will have a 0x0A (newline) after the characters typed in
 //    This must be removed before sending to the Bluetooth module - it would cause the command to be rejected
 
-#define DPIN_BLUESRL_RX A2  // serial in  - talk to Bluetooth module (KCX_BT_EMITTER) - connect to YELLOW wire
-#define DPIN_BLUESRL_TX A3  // serial out  - talk to Bluetooth module (KCX_BT_EMITTER) - connect to GREEN wire
+#define DPIN_BLUESRL_RX 9  // serial in  - talk to Bluetooth module (KCX_BT_EMITTER) - connect to YELLOW wire
+#define DPIN_BLUESRL_TX 2  // serial out  - talk to Bluetooth module (KCX_BT_EMITTER) - connect to GREEN wire
 
 SoftwareSerial myBlueSerial(DPIN_BLUESRL_RX, DPIN_BLUESRL_TX);  // to talk to Bluetooth
 
