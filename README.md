@@ -16,6 +16,20 @@ There are now two branches to this repo:
 
 My V1.7 parts are expected to arrive in the middle of July 2023 so in the meantime I won't be able to experiment much with the KCX_BT_EMITTER_V1.7 branch; please bear with me. 
 
+## KCX_putty
+
+This tool is designed to help explore the commands of the new V1.7 KCX_BT_EMITTER.
+
+The purpose of KCX_putty.ino is to be loaded in an Arduino connected
+the same as the "Programming Arduino" and act like a "dumb" terminal
+with echo on communicating between the USB "Serial Monitor" of the
+Arduino IDE and the KCX_BT_EMITTER.
+
+This is somewhat like the Linux/Unix utility "putty", thus the name KCX_putty
+
+This is derived from the Rubber Band Gun routine BlueToothTesting.ino
+- https://github.com/Mark-MDO47/RubberBandGun/tree/master/RBG_arduino/BlueToothTesting
+
 ## Description
 Note: These utilities were originally developed by me for the Rubber Band Gun (RBG) project https://github.com/Mark-MDO47/RubberBandGun
 
