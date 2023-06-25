@@ -4,9 +4,11 @@
 //   Rubber Band Gun - https://github.com/Mark-MDO47/RubberBandGun
 //   RBG - A high-tech imagining of the rubber band gun
 //
-// The purpose of BlueToothTesting.ino (someday I will rename it) is to make the
-//   "Programming Arduino" (which is loaded with this code) act like a terminal
-//   with echo on from USB to KCX_BT_EMITTER; input/output to/from the "Serial Monitor".
+// The purpose of KCX_putty.ino is to be loaded in an Arduino connected
+//   the same as the "Programming Arduino" and act like a "dumb" terminal
+//   with echo on communicating between the USB "Serial Monitor" of the
+//   Arduino IDE and the KCX_BT_EMITTER.
+// This is somewhat like the Linux/Unix utility "putty", thus the name KCX_putty
 //
 // At least for the V1.1 KCX_BT_EMITTER, the End-Of-Line (EOL) characters must
 //   be removed before sending the command to the KCX_BT_EMITTER.
