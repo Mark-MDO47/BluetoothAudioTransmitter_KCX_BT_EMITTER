@@ -1,42 +1,56 @@
 // Author: Mark Olson 2019-11-03
 //
-// Rubber Band Gun - https://github.com/Mark-MDO47/RubberBandGun
-// RBG - A high-tech imagining of the rubber band gun
+// originally written for KCX_BT_EMITTER firmware V1.1 for
+//   Rubber Band Gun - https://github.com/Mark-MDO47/RubberBandGun
+//   RBG - A high-tech imagining of the rubber band gun
 //
-// The purpose of BlueToothTesting.ino (someday I will rename it) is to program the Bluetooth module to auto-connect
-//     to a specific set of bluetooth speakers, headphones, etc.  Once this is done, the list will be retained.
+// The purpose of BlueToothTesting.ino (someday I will rename it) is to make the
+//   "Programming Arduino" (which is loaded with this code) act like a terminal
+//   with echo on from USB to KCX_BT_EMITTER; input/output to/from the "Serial Monitor".
 //
-// To do this programming:
-//   On Rubber Band Gun (RBG)
-//     Power off RBG
-//     Remove the clear cover on the handle of the RBG
-//     Inside the handle, find the female jumper connectors for the KCX_BT_EMITTER chip (near front of handle)
+// At least for the V1.1 KCX_BT_EMITTER, the End-Of-Line (EOL) characters must
+//   be removed before sending the command to the KCX_BT_EMITTER.
+//
+
+
+//////////////////////////////////////////////////////////////////////////////////////
+// To use this tool:
+//   With power off:
+//     Find the female jumper connectors for the KCX_BT_EMITTER chip
 //          label      color of wire
 //          GND        BLACK
 //          2 RX       GREEN
 //          9 TX       YELLOW
 //   On separate programming Arduino (using +5V interfaces)
-//     Power off programming Arduino
+//     Power off programming Arduino by disconnecting from USB
 //     Connect jumper wires with male ends as follows
 //          Pin      color of wire
 //          GND        BLACK
-//          2          GREEN  (Arduino TX)
-//          9          YELLOW (Arduino RX)
+//          2 RX       GREEN  (Arduino TX)
+//          9 TX       YELLOW (Arduino RX)
 //     Connect the programming Arduino jumper wires to the RBG jumper wires using color as the guide.
-//     Edit this sketch with MAC address(es) and name(s) of your Bluetooth speakers, headphones, etc.
-//   On Rubber Band Gun (RBG)
-//     Power on RBG
-//   On separate programming Arduino (using +5V interfaces)
+//   On your KCX_BT_EMITTER part
+//     Power on KCX_BT_EMITTER
+//   On the separate programming Arduino (using +5V interfaces)
 //     Connect programming Arduino to USB for PC running the Arduino software
 //     Upload the sketch from this file into the programming Arduino
-//     Wait for the string "*** KCX_BT_EMITTER PROGRAMMING COMPLETE ***
+//     Open Serial Monitor by selecting menu "Tools" -> "Serial Monitor" and follow instructions
+//        After each selected step, wait for the string "--- KCX_BT_EMITTER PROGRAMMING STEP COMPLETE ---"
 //     Disconnect programming Arduino from USB for PC running the Arduino software
-//   On Rubber Band Gun (RBG)
-//     Power off RBG
+//
+//   Disconnect the Programming Arduino (see below)
+//////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////
+// To disconnect the Programming Arduino
+//   Ensure that programming Arduino is disconnected from USB for PC running the Arduino software
+//   On your KCX_BT_EMITTER part
+//     Power off the KCX_BT_EMITTER
 //   On separate programming Arduino (using +5V interfaces)
 //     Disconnect the programming Arduino jumper wires from the RBG jumper wires
-//   On Rubber Band Gun (RBG)
-//     Store the jumper connectors safely in the handle and attach the clear cover on the handle of the RBG
+//   On your KCX_BT_EMITTER part
+//     Store the jumper connectors safely
+//////////////////////////////////////////////////////////////////////////////////////
 
 #include "Arduino.h"
 #include "SoftwareSerial.h"                  // to talk to KCX_BT_EMITTER without using up debug serial port
@@ -47,6 +61,8 @@
 // The KCX_BT_EMITTER (and some information on it) can be found here
 //     https://www.aliexpress.com/item/33058710334.html
 
+// FIXME TODO update this list for KCX_BT_EMITTER v1.7
+//
 // Here is a list of commands and the responses I have seen. This list is based on the following plus my experimentation
 //     https://item.taobao.com/item.htm?spm=a21wu.12321156-tw.0.0.7e76d1c7xEOcFZ&id=570274835710
 //     https://www.electro-tech-online.com/threads/kcx_bt_emitter-low-cost-bluetooth-bt-audio-module.158156/
@@ -128,24 +144,24 @@ SoftwareSerial myBlueSerial(DPIN_BLUESRL_RX, DPIN_BLUESRL_TX); // to talk to Blu
 #define NUMWAIT  3000 // loopcount waiting for response from Bluetooth module
 
 char inBytes[100];
-char const * cmd1 = "AT+";
-char const * cmd2 = "AT+REST";
-char const * cmd3 = "AT+GMR";
-char const * cmd4 = "AT+STATUS";
-char const * cmd5 = "AT+VMLINK?";
-char const * cmd6 = "AT+DISCON";
-char const * cmd7 = "AT+ADDLINKADD=0xf44efdecd39d"; // NOTE: must be exactly 12 characters for hex string
-char const * cmd8 = "AT+ADDLINKNAME=S1 Pro MDO";
-char const * cmd9 = "AT+VMLINK?";
-char const * cmd10 = "AT+";
+//char const * cmd1 = "AT+";
+//char const * cmd2 = "AT+REST";
+//char const * cmd3 = "AT+GMR";
+//char const * cmd4 = "AT+STATUS";
+//char const * cmd5 = "AT+VMLINK?";
+//char const * cmd6 = "AT+DISCON";
+//char const * cmd7 = "AT+ADDLINKADD=0xf44efdecd39d"; // NOTE: must be exactly 12 characters for hex string
+//char const * cmd8 = "AT+ADDLINKNAME=S1 Pro MDO";
+//char const * cmd9 = "AT+VMLINK?";
+//char const * cmd10 = "AT+";
 
-// #define NUMBAUDS 10
-// int long bauds[NUMBAUDS] = { 1200, 2400, 4800, 9600, 14400, 19200, 28800, 31250, 38400, 57600 };
+//#define NUMBAUDS 10
+//int long bauds[NUMBAUDS] = { 1200, 2400, 4800, 9600, 14400, 19200, 28800, 31250, 38400, 57600 };
 
-char const * cmds[10] = { cmd1, cmd2, cmd3, cmd4, cmd5, cmd6, cmd7, cmd8, cmd9, cmd10 };
+//char const * cmds[10] = { cmd1, cmd2, cmd3, cmd4, cmd5, cmd6, cmd7, cmd8, cmd9, cmd10 };
 
 // program
-#define NUMCMDS  10
+// #define NUMCMDS  10
 
 // examine
 // #define NUMCMDS 5
@@ -160,7 +176,7 @@ void setup() {
     ; // wait for serial port to connect. Needed for native USB port only
   }
   Serial.println();
-  Serial.println("Bluetooth testing init...");
+  Serial.println(F("Bluetooth testing init..."));
 
   myBlueSerial.begin(9600); // this is control for Bluetooth module (KCX_BT_EMITTER)
 
@@ -208,14 +224,14 @@ void testEcho() {
   if (idx > 0) { // if anything to send to Bluetooth chip
     // display the input
     for (odx = 0; odx < idx; odx++) {
-      Serial.print("char 0x");
+      Serial.print(F("char 0x"));
       Serial.print((int) inBytes[odx], HEX);
-      Serial.print(" ");
+      Serial.print(F(" "));
       Serial.println(inBytes[odx]);
       // printf("\neol char 0x%02X %c\n", (int) inBytes[odx], inBytes[odx]);
     }
     for (odx = 0; odx < edx; odx++) {
-      Serial.print("\neol char 0x");
+      Serial.print(F("\neol char 0x"));
       Serial.println((int) eolBytes[odx], HEX);
       // printf("\neol char 0x%02X\n", (int) eolBytes[odx]);
     }
@@ -232,22 +248,22 @@ void testEcho() {
   
 } // end test1()
 
-void testCmds() {
-
-  int cmdIdx;
-
-  for (cmdIdx = 0; cmdIdx < NUMCMDS; cmdIdx += 1) {
-    Serial.println("");
-    Serial.print("--CMD ");
-    Serial.print(cmdIdx);
-    Serial.print(" ");
-    Serial.println(cmds[cmdIdx]);
-    sendBlueCmd((char *) cmds[cmdIdx]);
-  }
-
-  delay(100);
-
-}
+//void testCmds() {
+//
+//  int cmdIdx;
+//
+//  for (cmdIdx = 0; cmdIdx < NUMCMDS; cmdIdx += 1) {
+//    Serial.println(F(""));
+//    Serial.print(F("--CMD "));
+//    Serial.print(cmdIdx);
+//    Serial.print(F(" "));
+//    Serial.println(cmds[cmdIdx]);
+//    sendBlueCmd((char *) cmds[cmdIdx]);
+//  }
+//
+//  delay(100);
+//
+//}
 
 unsigned int reportBlueCom() {
 
