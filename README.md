@@ -23,8 +23,7 @@ There is a start on V1.7 utilities. The following have been updated to some exte
 
 The KCX_BT_EMITTER V1.7 looks like this
 
-![alt text](https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/V1.7_001/images/KCX_BT_EMITTER_1.7_front.png "Front side of KCX_BT_EMITTER V1.7")
-![alt text](https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/V1.7_001/images/KCX_BT_EMITTER_1.7_back.png "Back side of KCX_BT_EMITTER V1.7")
+<img src="https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/V1.7_001/images/KCX_BT_EMITTER_1.7_front.png" width="300" alt="aliexpress.com picture of KCX BT EMITTER version 1.7 Front Side"> <img src="https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/V1.7_001/images/KCX_BT_EMITTER_1.7_back.png" width="300" alt="aliexpress.com picture of KCX BT EMITTER version 1.7 Back Side">
 
 The KCX_BT_EMITTER V1.1 looks like this
 
