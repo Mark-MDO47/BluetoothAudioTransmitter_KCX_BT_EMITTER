@@ -60,14 +60,6 @@ The wires I attached for the V1.7 KCX_BT_EMITTER are as follows (upper case from
 
 ## The text below is currently for firmware version V1.1; working now on updates for V1.7.
 
-The KCX_BT_EMITTER V1.1 looks like this
-
-![alt text](https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/master/images/KCX_BT_Board_IMG_1351.png "Front side of KCX_BT_EMITTER V1.1")
-
-![alt text](https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/master/images/KCX_BT_board_back_IMG_1357.png "Back side of KCX_BT_EMITTER V1.1")
-
-![alt text](https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/master/images/KCX-BT-EMITTER_PinFunction.png "Pin Function of KCX_BT_EMITTER V1.1")
-
 The KCX_BT_EMITTER Bluetooth Audio Transmitter Module receives line-level (not speaker-level) stereo audio in and transmits to a Bluetooth receiver (speaker, headphones, etc.). Be sure to connect the audio (analog) ground and do not connect audio ground to digital ground. Also due to latency in packetizing/depacketizing the Bluetooth audio, it is best to turn off any parallel wired speaker if using the Bluetooth audio at the same time.
 
 This chip works great! It is not the very latest Bluetooth spec so it doesn't work with every single Bluetooth speaker, but it works with many and then it sounds great. One downside is that it is so small that the soldering is a challenge for me.
