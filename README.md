@@ -70,6 +70,7 @@ Note that the KCX_BT_EMITTER expects 5V inputs for the serial port. I have heard
 
 That is why I used a cheap Arduino Uno or Arduino Nano clone, which seems to me to be the simplest. Alternatively (although I have not tried this), you could potentially use the ESP32 by passing the serial transmit to KCX_BT_EMITTER signal through a 3.5 V to 5 V buffer driver and vice-versa for the return signal. If I was doing this alternative method, I would be sure also to provide 5 V power to the KCX_BT_EMITTER.
 
+## How to use ProgrammingArduino
 The following document describes using this capability:
 - https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/master/ProgrammingArduino_SerialMonitor_SampleOutput.pdf
 
