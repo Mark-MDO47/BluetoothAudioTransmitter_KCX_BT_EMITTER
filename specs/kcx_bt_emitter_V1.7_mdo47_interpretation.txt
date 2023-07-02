@@ -131,13 +131,7 @@ illustrate:Disconnect current connection and search for pairing again
 return value: OK+PAIR
 NOTE: This command and pressingPAIRSame function as a button
 
-<19>: Disconnect the current connection and search for pairing again
-send:
-illustrate:Disconnect current connection and search for pairing again
-return value:
-NOTE: This command and pressingPAIRSame function as a button
-AT+PAIR
-OK+PAIR
+<19>: <<< This was duplicate to <18>; maybe try AT+PAIR? >>>
 
 <20>: Search for Bluetooth receiving devices
 send: AT+SCAN
@@ -214,18 +208,18 @@ $$$EXAMPLE 2$$$
 {{{recv}}} MEM_MacAdd 00:50c4a134373f
 {{{recv}}} MEM_MacAdd 01:123456789abc
 The data returned by the first command is analyzed as follows:
- OK+ADDLINKADD=50c4a134373f After receiving the command, return the to-be-written MAC address is 50c4a134373f
- BT_ADD_NUM=01              ADD_NUM district( MACaddress filtering connection) records the 1 Group 
- BT_NAME_NUM=00             recorded in NAME_NUM Zone (Bluetooth Name Filter Connections) records the 0 group, no record
- Auto_link_Add:null         last connected device MAC address: null none
- MEM_MacAdd 00:50c4a134373f MEM_MacAddrecording area 00 District has a set of records, MACaddress is 50c4a134373f
+  OK+ADDLINKADD=50c4a134373f After receiving the command, return the to-be-written MAC address is 50c4a134373f
+  BT_ADD_NUM=01              ADD_NUM district( MACaddress filtering connection) records the 1 Group 
+  BT_NAME_NUM=00             recorded in NAME_NUM Zone (Bluetooth Name Filter Connections) records the 0 group, no record
+  Auto_link_Add:null         last connected device MAC address: null none
+  MEM_MacAdd 00:50c4a134373f MEM_MacAddrecording area 00 District has a set of records, MACaddress is 50c4a134373f
 The data returned by the second command is analyzed as follows:
- OK+ADDLINK ADD=123456789abc After receiving the command, return the to-be-written MAC address is 123456789abc
- BT_ADD_NUM=02              ADD_NUM district (MACaddress filtering connection) records the 2 Group 
- BT_NAME_NUM=00             recorded in NAME_NUM Zone (Bluetooth Name Filter Connections) records the 0 group, no record 
- Auto_link_Add:null         last connected device MAC address: null none
- MEM_MacAdd 00:50c4a134373f MEM_MacAddrecording area 00 District has a set of records, MACaddress is 50c4a134373f
- MEM_MacAdd 01:123456789abc MEM_MacAddrecording area 01 District has a set of records, MACaddress is 123456789abc
+  OK+ADDLINKADD=123456789abc After receiving the command, return the to-be-written MAC address is 123456789abc
+  BT_ADD_NUM=02              ADD_NUM district (MACaddress filtering connection) records the 2 Group 
+  BT_NAME_NUM=00             recorded in NAME_NUM Zone (Bluetooth Name Filter Connections) records the 0 group, no record 
+  Auto_link_Add:null         last connected device MAC address: null none
+  MEM_MacAdd 00:50c4a134373f MEM_MacAddrecording area 00 District has a set of records, MACaddress is 50c4a134373f
+  MEM_MacAdd 01:123456789abc MEM_MacAddrecording area 01 District has a set of records, MACaddress is 123456789abc
 
 [3] Set the automatic connection Bluetooth name (for example, we have 2 bluetooth receivers, we know the bluetooth name for Bluetooth Audio and bt_audio, we need to search only these two in many Bluetooth receiving devices.
 The device with the Bluetooth device name is only connected, and other devices are not connected after searching.
@@ -245,19 +239,19 @@ Just add to the filter list, up to support 10 group, this record group has power
 {{{recv}}} MEM_Name 00:Bluetooth Audio
 {{{recv}}} MEM_Name 01:bt_audio
 The data returned by the first command is parsed as follows:
- OK+ADDLINKNAME=Bluetooth Audio   After receiving the command, return the name of the bluetooth to be written into the automatic connection filterBluetooth Audio 
- BT_ADD_NUM=00                    ADD_NUMdistrict(MACaddress filtering connection) records the 0 group, no record
- BT_NAME_NUM=01                   recorded inNAME_NUMZone (Bluetooth Name Filter Connections) records the 1 Group
- Auto_link_Add: null              last connected deviceMACaddress: null none
- MEM_Name 00: Bluetooth Audio     MEM_Namerecording area 00 zone has a group of records, bluetooth named Bluetooth Audio
+  OK+ADDLINKNAME=Bluetooth Audio   After receiving the command, return the name of the bluetooth to be written into the automatic connection filterBluetooth Audio 
+  BT_ADD_NUM=00                    ADD_NUMdistrict(MACaddress filtering connection) records the 0 group, no record
+  BT_NAME_NUM=01                   recorded inNAME_NUMZone (Bluetooth Name Filter Connections) records the 1 Group
+  Auto_link_Add: null              last connected deviceMACaddress: null none
+  MEM_Name 00: Bluetooth Audio     MEM_Namerecording area 00 zone has a group of records, bluetooth named Bluetooth Audio
 The data returned by the second command is parsed as follows:
- OK+ADDLINKNAME=bt_audio          After receiving the command, return the name of the bluetooth to be written into the automatic connection filter bt_audio
- BT_ADD_NUM=00                    ADD_NUMdistrict(MACaddress filtering connection) records the 0 group, no record
- BT_NAME_NUM=02                   recorded in NAME_NUM Zone (Bluetooth Name Filter Connections) records the 2 Group
- Auto_link_Add: null              last connected deviceMACaddress:nullnone
- MEM_Name 00: Bluetooth Audio     MEM_Name recording area 00 zone has a group of records, bluetooth named Bluetooth Audio
- MEM_Name 01: bt_audio            MEM_Name recording area 01 zone has a group of records, bluetooth named bt_audio
-Note:MAC The relationship between address filtering and Bluetooth name filtering is OR, that is, as long as the searched MAC address or Bluetooth name is in the filter connection list, as long as there is a match, it will be automatically connected.
+  OK+ADDLINKNAME=bt_audio          After receiving the command, return the name of the bluetooth to be written into the automatic connection filter bt_audio
+  BT_ADD_NUM=00                    ADD_NUMdistrict(MACaddress filtering connection) records the 0 group, no record
+  BT_NAME_NUM=02                   recorded in NAME_NUM Zone (Bluetooth Name Filter Connections) records the 2 Group
+  Auto_link_Add: null              last connected deviceMACaddress:nullnone
+  MEM_Name 00: Bluetooth Audio     MEM_Name recording area 00 zone has a group of records, bluetooth named Bluetooth Audio
+  MEM_Name 01: bt_audio            MEM_Name recording area 01 zone has a group of records, bluetooth named bt_audio
+Note: MAC The relationship between address filtering and Bluetooth name filtering is OR, that is, as long as the searched MAC address or Bluetooth name is in the filter connection list, as long as there is a match, it will be automatically connected.
 If there is no record in the filter list, the device will be connected if it is found.
 Memories that need to delete the filter list only need to send the command:AT+DELVMLINK
 You can delete all the Bluetooth name and MAC Filter lists.

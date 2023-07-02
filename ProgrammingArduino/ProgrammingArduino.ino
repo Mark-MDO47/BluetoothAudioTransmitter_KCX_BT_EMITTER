@@ -68,81 +68,269 @@
 // Updated version for module KCX_BT_EMITTER v1.7
 //////////////////////////////////////////////////////////////////////////////////////
 
-// FIXME TODO update this list for KCX_BT_EMITTER v1.7
+// KCX_BT_EMITTER v1.7 list of commands
 //
 // Here is a list of "AT" commands and the responses I have seen. This list is based on the following plus my experimentation
-//     https://item.taobao.com/item.htm?spm=a21wu.12321156-tw.0.0.7e76d1c7xEOcFZ&id=570274835710
-//     https://www.electro-tech-online.com/threads/kcx_bt_emitter-low-cost-bluetooth-bt-audio-module.158156/
-// < 1>: Test Command
-// Description: test communication is normal
-//   AT+
-//     OK+
-// < 2>: system reset
-// Description: RESET
-//   AT+RESET
-//     OK+
-//     REST
-//     POWER ON
-// < 3>: query software version
-// Description: Check the software version; my devices show V1.1
-//   AT+GMR?
-//     OK+
-//     KCX_BTEMITTER_Vx.x
-// < 4>: query connection status
-// Description: search for Bluetooth connection status; x=0: no connection, x=1 connected
-//   AT+STATUS
-//     OK+
-//     STATUS:x
-// < 5>: specify MAC address connection
-// Description: connect to the MAC address link (here shows the device connecting to the MAC-0xf44efdecd39d )
-// NOTE: hex string must be EXACTLY 12 characters; add leading zeros if needed
-//   AT+CONADD=0xf44efdecd39d
-//     OK+
-//     CON:0xf44efdecd39d
-//     CONNECTED
-// < 6>: disconnect
-// Description: disconnect the current bluetooth connection
-//   Send : AT+DISCON
-//     OK+DISCON
-//     DISCONNECT
-// < 7>: Scan for any visible Bluetooth devices
-// Description: search Bluetooth receive device, cycle search and list ? Blue tooth device information found
-//   AT+PAIR
-//     OK+SCAN
-//     New Devices:1
-//     MacAdd:0xf44efdecd39d
-//     Name:Bluetooth Audio
-//     ALL Devices=1
-// < 8>: add the Bluetooth device MAC address to internal list of MAC addresses for auto-connection
-// Description: with this command-set, a total of 10 MAC address records can be attached to 10 devices in a sequence.
-// Set the memory. When the module is started , it will search the MAC address of the device and the MAC address of the recording area.
-// The address is automatically connected to any one of the MAC addresses of the recording area, and is not connected when the address is not consistent, so as to achieve the specified MAC address connection.
-// When 10 recording spaces are empty , MAC address filtering is not performed ( by default, this area is empty in the factory).
-//   AT+ADDLINKADD=0xf44efdecd39d
-//     OK+
-//     ADDLINKADD
-//     VM_MacAdd 1 =0xf44efdecd39d
-// < 9>: associate the Bluetooth device name with internal list of MAC addresses for auto-connection
-// Description: with this command setting, specifying the blue tooth name connection, a total of 10 blue tooth names can be added, and 10 devices can be recorded sequentially on the chip.
-// Memory. When the module is started, it will search the blue tooth name of the device and the blue tooth name of the recording area.
-// The blue tooth name is automatically associated with any of the blue tooth names in the recording area , and is not associated with any of the blue tooth names in the recording area , so as to achieve the specified blue tooth name connection function . When 10
-// When all the recording spaces are empty , the blue tooth name is not filtered ( by default, this area is empty in the factory).
-//   AT+ADDLINKNAME=S1 Pro MDO
-//     OK+ADDLINKNAME
-//     VM_Name 0 =S1 Pro MDO
-// <10>: query the auto-connect memory area
-// Description: sending this command returns all information recorded in the automatically reconnect MAC and device name memory.
-//   AT+VMLINK?
-//     OK+VMLINK
-//     BT_ADD_NUM=1
-//     BT_NAME_NUM=1
-//     Last_Add=0xf44efdecd39d
-//     VM_MacAdd0=0xf44efdecd39d
-//     VM_Name0=S1 Pro MDO
-// <11>: delete all records in the auto-connect memory
-//   AT+DELVMLINK
-//     Delete_Vmlink
-
+//     https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/master/specs/BT%20GY19733-CN.zh-CN.en.pdf
+//
+// <1>: test command
+// send: AT+
+// Description: Test whether the communication is normal
+// Return value: OK+ (Return response)
+//
+// <2>: System reset
+// send: AT+RESET
+// Description: reset
+// return value: OK+RESET (return answer)
+//               POWER ON (restart)
+//
+// <3>: Read the current serial port baud rate
+// send: AT+BAUD?
+// Description: Get the baud rate
+// return value: OK+BAUD=(no),BAUD = baud (returns the current baud rate)
+// >>> DID THEY USE no INSTEAD OF n ???
+// Note:baudRange is0-4, the corresponding baud rate is as follows
+// n=0,9600
+// n=1,19200
+// n=2,38400
+// n=3,57600
+// n=4,115200
+//
+//
+//
+// <4>: Set the current serial port baud rate
+// send: =AT+BAUD=no
+// >>> OR IS IT send: =AT+BAUD=n ???
+// Description: Get the baud rate
+// return value: OK+BAUD=(no),BAUD = baud (returns the current baud rate)
+// >>> AGAIN DID THEY USE no INSTEAD OF n ???
+// Note:baud Range is 0-4, the corresponding baud rate is as follows
+// n=0,9600
+// n=1,19200
+// n=2,38400
+// n=3,57600
+// n=4,115200
+// After setting the baud rate, the chip will restart
+//
+//
+// <5>: query version
+// send: AT+GMR?
+// Description: Check the software version
+// return value: OK+VERS :KCX_BT_RTX_V1.x (returns software version)
+//
+//
+// <6>: Query receive/transmit mode
+// send: AT+BT_MODE?
+// Description: Inquire whether the module is working in transmit mode or receive mode
+// return value: OK+BT_EMITTER launch mode
+// return value: OK+BT_RECEIVER receive mode
+//
+// <7>: shutdown
+// send: AT+POWER_OFF
+// Description: Module shutdown
+// return value: OK+POWEROFF_MODE enter shutdown
+// Note: To turn on again after shutting down, you need to press the button to wake up or power off and restart to wake up
+//
+// <8>: Query the currently playing audio source signal channel
+// send: AT+CHANNEL?
+// Description: Search the currently playing audio source signal channel
+// return value: OK+CHANNEL=BT CHANNEL Bluetooth audio channel
+// return value: OK+CHANNEL=LINE CHANNEL Analog audio input port
+// return value: OK+CHANNEL=PC CHANNEL USBSound card to computer port
+//
+//
+// <9>: Set the current audio source signal channel
+// send: AT+CHANNEL=ch
+// Description: Search the currently playing audio source signal channel
+// return value: ch=0 reserved (void)
+// return value: ch=1 Analog audio input port
+// return value: ch=2 USB Sound card to computer port
+//
+// <10>: get connection status
+// send: AT+STATUS?
+// illustrate:get connection status
+// return value: OK+STATUS:0 bluetooth not connected
+// return value: OK+STATUS:1 bluetooth connected
+//
+// <11>: get bluetooth name
+// send: AT+NAME?
+// illustrate:get bluetooth name
+// return value: OK+NAME=(name)
+// Name:bluetooth name
+// Note: This command is effective in receiving mode, and the transmitting mode does not broadcast the Bluetooth name
+//
+// <12>: set bluetooth name
+// send: AT+NAME+(name)
+// illustrate:set bluetooth name
+// return value: OK+NAME=(name)
+// Name: bluetooth name
+// Note: This command is effective in receiving mode, and the transmitting mode does not broadcast the Bluetooth name. After the setting is successful, the chip will restart.
+//
+// <13>: get bluetoothMACaddress
+// send: AT+MAC?
+// illustrate:get bluetooth MAC
+// return value: OK+MAC:(mac) 3f3734a1c450
+//               mac: 6 bytes MAC
+// Note: This command reception mode is valid
+//
+// <14>: get volume
+// send: AT+VOL?
+// illustrate:get volume
+// return value: OK+VOL=(vol)
+// Note: vol:volume, range: 00-31, common 32 level, the default maximum volume when booting:31
+//
+// <15>: Set the volume
+// send: AT+VOL=(vol)
+// illustrate:set volume
+// return value: OK+VOL=(vol)
+// Note: vol:volume, range: 00-31, common 32 level, the default maximum volume when booting:31
+//
+// <16>:play / Pause
+// send: AT+PAUSE
+// illustrate: play / Pause
+// return value: OK+PAUSE pause
+// return value: OK+PLAY play
+// Note: The play/pause state changes every time this command is sent
+//
+//
+// <17>: get play/pause status
+// send: AT+PAUSE?
+// illustrate:Get play/pause status
+// return value: OK+PAUSE pause
+// return value: OK+PLAY play
+//
+//
+// <18>: Disconnect the current connection and search for pairing again
+// send: AT+PAIR
+// illustrate:Disconnect current connection and search for pairing again
+// return value: OK+PAIR
+// NOTE: This command and pressing PAIR Same function as a button
+//
+// <19>: <<< This was a duplicate of <18> >>>
+//
+// <20>: Search for Bluetooth receiving devices
+// send: AT+SCAN
+// Description: Search for bluetooth receiving devices, cycle through and list all searched bluetooth device information
+// return value: OK+SCAN (Perform device search operation)
+// return value: New Devices: 1 (found on the N devices found)
+// return value: MacAdd:0x32a16c6f7f99 (This device's MAC address is 0x32a16c6f7f99)
+// return value: Name: Bluetooth Audio (The bluetooth name for this device is Bluetooth Audio)
+// return value: ALL Devices=1 (The total number of currently searched devices is 1)
+//
+// <21>: add auto-connected MAC address
+// send: AT+ADDLINKADD=(mac)
+// Description: Set the specified by this command MAC Address connection, a total of10 individual MAC Address record space can be added 10 Each device is sequentially recorded in the chip's built-in memory.
+// When the module is turned on to search for the Bluetooth receiving device, it will search for the device MAC address and record area of MAC Addresses are compared one by one, when the device MAC One of the
+// address and recording areas MAC Automatically connect when the address is consistent, and do not connect if there is no match, so as to achieve the specified MAC The function of the address connection. When all record spaces are empty, no MAC The address is matched and filtered, and it will be connected when it is searched (by default, this area is empty, and this command is valid when it is set to transmit
+// mode).
+// return value: OK+ADDLINKADD=(mac) implementMACaddress memory
+// return value: BT_ADD_NUM=(add_num)
+// return value: BT_NAME_NUM=(name_num)
+// return value: Auto_link_Add:(Auto_link mac)
+// return value: VM_MacAdd(add_num) = (add) (MACaddress macmemory in VMdistrict vm_num stored successfully)
+// Note: A total of 10 individual MAC address, stored in sequential order at MacAdd 00 - MacAdd 09 common 10
+// If the maximum memory area is exceeded, an error will be reported: Addr More than 10 !
+//
+// <22>: Add the name of the Bluetooth device to be automatically connected
+// send: AT+ADDLINKNAME=(name)
+// Description: Set the specified Bluetooth name connection through this command, there are a total of10Bluetooth name record spaces can be added10Each device is sequentially recorded in the chip's builtin
+// memory. When the module is turned on to search for Bluetooth receiving devices, it will compare the Bluetooth name of the searched device with the Bluetooth name in the recording area one by one. When
+// the Bluetooth name of the device is consistent with any of the Bluetooth names in the recording area, it will automatically connect. This achieves the function of specifying the Bluetooth name connection. When all record spaces are empty, no Bluetooth name filtering will be performed (by default, this area is empty) .
+// return value: OK+ADDLINKNAME (implement name memory)
+// return value: VM_Name (name_num) = (name) (Bluetooth name (name) memory in VM district name_num store successfully)
+// Note: A total of 10 Bluetooth names, stored sequentially in VM_Name 00 - VM_Name 09 common 10
+// If the maximum memory area is exceeded, an error will be reported: Name More than 10 !
+//
+// <23>: Query the automatic connection record area
+// send: AT+VMLINK?
+// Description: Sending this command will return the record in the auto-reconnect MAC All information in the record area and device name record area.
+// return value: OK+VMLINK (return answer)
+// return value: BT_ADD_NUM=(add_num ) (add_num: memory MAC Number of addresses 0-9 common 10 individual)
+// return value: BT_NAME_NUM=(name_num) (name_num: The number of memorized device names and addresses 0-9 common 10 individual)
+// return value: VM_MacAdd0=(mac) Last_Add=(last add) (last add: last connected MAC address) (mac: Automatically reconnect recording area 1 of MAC address)
+// return value: VM_Name0=(name) (name: Automatically reconnect recording area 1 device name)
+//
+// <24>: Delete all the records in the automatic connection record area
+// send: AT+DELVMLINK
+// Description: Delete all records in the automatic connection area (that is, restore to the factory default without filtering MAC address and device name)
+// Return value: Delete_Vmlink (Perform delete operation)
+//
+//
+//
+// EXAMPLES:
+// [1] send AT+ test command
+// $$$EXAMPLE 1$$$
+// <<<send>>> AT+
+// {{{recv}}} OK+
+//
+// [2] Set the automatic connection address (for example, we have 2 bluetooth receivers, we know these device MAC address are 50c4a134373f and 123456789abc,
+// we need to search only these two in many Bluetooth receiving devices MAC
+// The device with the matching address will be connected, and other devices will not be connected after searching.
+// At this time, you only need to connect the two Bluetooth MAC
+// The address can be added to the filter list, and the maximum can be added 10 group, the secondary record group has power-off save function)
+// $$$EXAMPLE 2$$$
+// <<<send>>> AT+ADDLINKADD=50c4a134373f
+// {{{recv}}} OK+ADDLINKADD=50c4a134373f
+// {{{recv}}} BT_ADD_NUM=01
+// {{{recv}}} BT_NAME_NUM=00
+// {{{recv}}} Auto_link_Add:null
+// {{{recv}}} MEM_MacAdd 00:50c4a134373f
+// <<<send>>> AT+ADDLINKADD=123456789abc
+// {{{recv}}} OK+ADDLINKADD=123456789abc
+// {{{recv}}} BT_ADD_NUM=02
+// {{{recv}}} BT_NAME_NUM=00
+// {{{recv}}} Auto_link_Add:null
+// {{{recv}}} MEM_MacAdd 00:50c4a134373f
+// {{{recv}}} MEM_MacAdd 01:123456789abc
+// The data returned by the first command is analyzed as follows:
+//   OK+ADDLINKADD=50c4a134373f After receiving the command, return the to-be-written MAC address is 50c4a134373f
+//   BT_ADD_NUM=01              ADD_NUM district( MACaddress filtering connection) records the 1 Group
+//   BT_NAME_NUM=00             recorded in NAME_NUM Zone (Bluetooth Name Filter Connections) records the 0 group, no record
+//   Auto_link_Add:null         last connected device MAC address: null none
+//   MEM_MacAdd 00:50c4a134373f MEM_MacAddrecording area 00 District has a set of records, MACaddress is 50c4a134373f
+// The data returned by the second command is analyzed as follows:
+//   OK+ADDLINKADD=123456789abc After receiving the command, return the to-be-written MAC address is 123456789abc
+//   BT_ADD_NUM=02              ADD_NUM district (MACaddress filtering connection) records the 2 Group
+//   BT_NAME_NUM=00             recorded in NAME_NUM Zone (Bluetooth Name Filter Connections) records the 0 group, no record
+//   Auto_link_Add:null         last connected device MAC address: null none
+//   MEM_MacAdd 00:50c4a134373f MEM_MacAddrecording area 00 District has a set of records, MACaddress is 50c4a134373f
+//   MEM_MacAdd 01:123456789abc MEM_MacAddrecording area 01 District has a set of records, MACaddress is 123456789abc
+//
+// [3] Set the automatic connection Bluetooth name (for example, we have 2 bluetooth receivers, we know the bluetooth name for Bluetooth Audio and bt_audio, we need to search only these two in many Bluetooth receiving devices.
+// The device with the Bluetooth device name is only connected, and other devices are not connected after searching.
+// At this time, you only need to put the two Bluetooth device names.
+// Just add to the filter list, up to support 10 group, this record group has power-off save function).
+// <<<send>>> AT+ADDLINKNAME=Bluetooth Audio
+// {{{recv}}} OK+ADDLINKNAME=Bluetooth Audio
+// {{{recv}}} BT_ADD_NUM=00
+// {{{recv}}} BT_NAME_NUM=01
+// {{{recv}}} Auto_link_Add:null
+// {{{recv}}} MEM_Name 00:Bluetooth Audio
+// <<<send>>> AT+ADDLINKNAME=bt_audio
+// {{{recv}}} OK+ADDLINKNAME=bt_audio
+// {{{recv}}} BT_ADD_NUM=00
+// {{{recv}}} BT_NAME_NUM=02
+// {{{recv}}} Auto_link_Add:null
+// {{{recv}}} MEM_Name 00:Bluetooth Audio
+// {{{recv}}} MEM_Name 01:bt_audio
+// The data returned by the first command is parsed as follows:
+//   OK+ADDLINKNAME=Bluetooth Audio   After receiving the command, return the name of the bluetooth to be written into the automatic connection filterBluetooth Audio
+//   BT_ADD_NUM=00                    ADD_NUMdistrict(MACaddress filtering connection) records the 0 group, no record
+//   BT_NAME_NUM=01                   recorded inNAME_NUMZone (Bluetooth Name Filter Connections) records the 1 Group
+//   Auto_link_Add: null              last connected deviceMACaddress: null none
+//   MEM_Name 00: Bluetooth Audio     MEM_Namerecording area 00 zone has a group of records, bluetooth named Bluetooth Audio
+// The data returned by the second command is parsed as follows:
+//   OK+ADDLINKNAME=bt_audio          After receiving the command, return the name of the bluetooth to be written into the automatic connection filter bt_audio
+//   BT_ADD_NUM=00                    ADD_NUMdistrict(MACaddress filtering connection) records the 0 group, no record
+//   BT_NAME_NUM=02                   recorded in NAME_NUM Zone (Bluetooth Name Filter Connections) records the 2 Group
+//   Auto_link_Add: null              last connected deviceMACaddress:nullnone
+//   MEM_Name 00: Bluetooth Audio     MEM_Name recording area 00 zone has a group of records, bluetooth named Bluetooth Audio
+//   MEM_Name 01: bt_audio            MEM_Name recording area 01 zone has a group of records, bluetooth named bt_audio
+// Note: MAC The relationship between address filtering and Bluetooth name filtering is OR, that is, as long as the searched MAC address or Bluetooth name is in the filter connection list, as long as there is a match, it will be automatically connected.
+// If there is no record in the filter list, the device will be connected if it is found.
+// Memories that need to delete the filter list only need to send the command:AT+DELVMLINK
+// You can delete all the Bluetooth name and MAC Filter lists.
+//
 
 #include "Arduino.h"
 #include "SoftwareSerial.h"  // to talk to KCX_BT_EMITTER without using up debug serial port
@@ -164,32 +352,45 @@ uint8_t DEBUG_SERIAL_IN = 0;  // 1 to debug the serial input code
 
 char inBytes[100];
 char const *cmd_AT = "AT+";
-char const *cmd_REST = "AT+RESET";
-char const *cmd_GMR = "AT+GMR?";
-char const *cmd_BAUD = "AT+BAUD?";
-char const *cmd_STATUS = "AT+STATUS?";
-char const *cmd_DISCON = "AT+DISCON";
-char const *cmd_PAIR = "AT+PAIR";
-char const *cmd_ADDLINKADD = "AT+ADDLINKADD=0x";  // NOTE: must be exactly 12 characters for hex string
-char const *cmd_ADDLINKNAME = "AT+ADDLINKNAME=";
-char const *cmd_VMLINK = "AT+VMLINK?";
-char const *cmd_DELVMLINK = "AT+DELVMLINK";
+char const *cmd_RESET = "AT+RESET";
+char const *cmd_BAUD_RD = "AT+BAUD?";
+char const *cmd_BAUD = "AT+BAUD="; // 0=9600 1=19200 2=38400 3=57600 4=115200 (default = 4)
+char const *cmd_GMR_RD = "AT+GMR?";
+char const *cmd_BT_MODE_RD = "AT+BT_MODE?";
 char const *cmd_PWROFF = "AT+POWER_OFF";
+char const *cmd_AUD_CH_RD = "AT+CHANNEL?";
+char const *cmd_AUD_CH = "AT+CHANNEL="; // 0=reserved 1=Analog audio input port 2=USB Sound card to computer port
+char const *cmd_STATUS_RD = "AT+STATUS?";
+char const *cmd_BT_NAME_RD = "AT+NAME?"; // receiving mode only
+char const *cmd_BT_NAME = "AT+NAME="; // receiving mode only
+char const *cmd_BT_MAC_RD = "AT+MAC?";
+char const *cmd_VOL_RD = "AT+VOL?";
+char const *cmd_VOL = "AT+VOL="; // range: 00-31 ?must be exactly 2 characters?
+char const *cmd_TOGGLE_PLAY_PAUSE = "AT+PAUSE";
+char const *cmd_PAIR = "AT+PAIR";
+char const *cmd_SCAN = "AT+SCAN";
+char const *cmd_DISCON = "AT+DISCON";
+char const *cmd_ADDLINKADD = "AT+ADDLINKADD=";  // NOTE: must be exactly 12 characters for hex string
+char const *cmd_ADDLINKNAME = "AT+ADDLINKNAME=";
+char const *cmd_VMLINK_RD = "AT+VMLINK?";
+char const *cmd_DELVMLINK = "AT+DELVMLINK";
 
 char cmd_bld_ADDLINKADD[32];   // must build these in RAM from user input
 char cmd_bld_ADDLINKNAME[64];  // must build these in RAM from user input
 
-#define CMD_COUNT 7
+#define CMD_COUNT 8 // 0 counts as a command
+#define CMD_MAX (CMD_COUNT-1)
 
-char const *cmdsPair[] = { cmd_AT, cmd_REST, cmd_AT, cmd_PAIR };
-char const *cmdsDispRAM[] = { cmd_AT, cmd_VMLINK };
-char const *cmdsStatus[] = { cmd_AT, cmd_GMR, cmd_BAUD, cmd_STATUS };
-char const *cmdsAddRAM[] = { cmd_AT, cmd_DISCON, cmd_VMLINK, cmd_bld_ADDLINKADD, cmd_bld_ADDLINKNAME, cmd_REST, cmd_AT, cmd_VMLINK };
-char const *cmdsClearRAM[] = { cmd_AT, cmd_DISCON, cmd_DELVMLINK, cmd_REST, cmd_AT, cmd_VMLINK };
+char const *cmdsPair[] = { cmd_AT, cmd_RESET, cmd_AT, cmd_PAIR };
+char const *cmdsScan[] = { cmd_AT, cmd_RESET, cmd_AT, cmd_SCAN };
+char const *cmdsDispRAM[] = { cmd_AT, cmd_VMLINK_RD };
+char const *cmdsStatus[] = { cmd_AT, cmd_GMR_RD, cmd_BAUD_RD, cmd_STATUS_RD };
+char const *cmdsAddRAM[] = { cmd_AT, cmd_DISCON, cmd_VMLINK_RD, cmd_bld_ADDLINKADD, cmd_bld_ADDLINKNAME, cmd_RESET, cmd_AT, cmd_VMLINK_RD };
+char const *cmdsClearRAM[] = { cmd_AT, cmd_DISCON, cmd_DELVMLINK, cmd_RESET, cmd_AT, cmd_VMLINK_RD };
 char const *cmdsDiscon[] = { cmd_AT, cmd_DISCON };
 char const *cmdsPowerOff[] = { cmd_AT, cmd_PWROFF };
 
-char const *menuOptions[CMD_COUNT] = { "\n1=PAIR", "\n2=DISPLAY", "\n3=ADD", "\n4=DELETE ALL", "\n5=STATUS", "\n6=Disconnect", "\n7=PowerOff module" };
+char const *menuOptions[CMD_COUNT] = { "\n0=SCAN", "\n1=PAIR", "\n2=DISPLAY", "\n3=ADD", "\n4=DELETE ALL", "\n5=STATUS", "\n6=Disconnect", "\n7=PowerOff module" };
 
 void setup() {
 
@@ -210,7 +411,8 @@ void loop() {
   if (0 == menuPrinted) {
     menuPrinted = 1;
     Serial.println(F(""));
-    Serial.println(F("   1 - Pair with Bluetooth receiver devices (such as speaker, headphones, etc.)"));
+    Serial.println(F("   0 - Pair with Bluetooth receiver devices (such as speaker, headphones, etc.)"));
+    Serial.println(F("   1 - Scan for Bluetooth receiver devices"));
     Serial.println(F("   2 - Display stored auto-connect Bluetooth receiver devices"));
     Serial.println(F("   3 - Add one auto-connect Bluetooth receiver device to storage"));
     Serial.println(F("   4 - Delete all auto-connect Bluetooth receiver devices from storage"));
@@ -221,15 +423,15 @@ void loop() {
   }
 
   if (Serial.available()) {
-    uint8_t myChoice = 0;
+    uint8_t myChoice = 99;
 
     menuPrinted = 0;
     myChoice = getSerial_uint8_t();
-    if ((0 == myChoice) || (myChoice > CMD_COUNT)) {
-      Serial.print(F("ERROR - choice must be 1 through "));
-      Serial.println(CMD_COUNT);
+    if (myChoice > CMD_MAX) {
+      Serial.print(F("ERROR - choice must be 0 through "));
+      Serial.println(CMD_MAX);
     } else {
-      Serial.println(menuOptions[myChoice - 1]);
+      Serial.println(menuOptions[myChoice]);
       processCommand(myChoice);
     }
   }
@@ -248,8 +450,13 @@ void processCommand(uint8_t theChoice) {
 
   reportBlueCom();
   switch (theChoice) {
-    case 1:  // 1 - Pair with Bluetooth receiver devices (such as speaker, headphones, etc.)");
+    case 0:  // 0 - Pair with Bluetooth receiver devices (such as speaker, headphones, etc.)");
       sendBlueCmds(cmdsPair, (uint8_t)NUMOF(cmdsPair));
+      // need to hang around a little more
+      loopReportBlueCom();
+      break;
+    case 1:  // 1 - Scan for Bluetooth receiver devices");
+      sendBlueCmds(cmdsScan, (uint8_t)NUMOF(cmdsScan));
       // need to hang around a little more
       loopReportBlueCom();
       break;
