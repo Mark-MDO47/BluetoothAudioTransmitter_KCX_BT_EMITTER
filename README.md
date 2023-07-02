@@ -60,6 +60,7 @@ Best information on the Bluetooth module I could find is here; need to translate
 
 Some more usage info on the Bluetooth module, especially English information on controlling with serial AT commands
 - https://www.electro-tech-online.com/threads/kcx_bt_emitter-low-cost-bluetooth-bt-audio-module.158156/
+- https://www.electro-tech-online.com/attachments/atwithsomeenglish-jpg.122398/
 
 Look in the comments in ProgrammingArduino.ino to see my interpretation of the AT commands
 - https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/master/ProgrammingArduino/ProgrammingArduino.ino
