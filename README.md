@@ -43,6 +43,21 @@ It took me a while to find sources for the V1.7 version. Here are two sources I 
 - https://store.siqma.com/kcx-bt-emitter.html
 - https://www.aliexpress.us/item/3256805363984973.html
 
+The wires I attached for the V1.7 KCX_BT_EMITTER are as follows (upper case from one box of wires; lower case from the other)
+
+| Pin | Color |
+| --- | --- |
+| DM | pink |
+| DP | purple |
+| AGND | orange |
+| AUDIO_R | WHITE |
+| AUDIO_L | BLUE |
+| TX | yellow |
+| RX | GREEN |
+| LINK | brown |
+| PGND | BLACK |
+| +5V | RED |
+
 ## The text below is currently for firmware version V1.1; working now on updates for V1.7.
 
 The KCX_BT_EMITTER V1.1 looks like this
