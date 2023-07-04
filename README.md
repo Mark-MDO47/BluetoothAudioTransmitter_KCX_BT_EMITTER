@@ -14,7 +14,11 @@ There are now two branches to this repo:
 - https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/tree/KCX_BT_EMITTER_V1.1 - works with firmware V1.1 and based on everything from before the pull request
 - https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/tree/KCX_BT_EMITTER_V1.7 - works with firmware V1.7, based on Holger's code, and will be under development
 
-My V1.7 parts are expected to arrive in the middle of July 2023 so in the meantime I won't be able to experiment much with the KCX_BT_EMITTER_V1.7 branch; please bear with me. 
+My V1.7 parts are expected to arrive in the middle of July 2023 so in the meantime I won't be able to experiment much with the KCX_BT_EMITTER_V1.7 branch; please bear with me.
+
+Looking over the spec, there are a lot of new capabilities in V1.7 but two changes that make the V1.1 version of ProgrammingArduino.ino not work with V1.7 hardware
+- The default baud rate changed from 9600 to 115200
+- The "reset" command spelling changed from "AT+REST" to "AT+RESET"
 
 ## KCX_putty
 
