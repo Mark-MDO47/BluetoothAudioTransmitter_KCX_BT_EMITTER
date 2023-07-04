@@ -49,18 +49,34 @@ The KCX_BT_EMITTER V1.7 looks like this
 
 The wires I attached for the V1.7 KCX_BT_EMITTER are as follows (upper case from one box of wires; lower case from the other)
 
-| Pin | Color |
-| --- | --- |
-| DM | pink |
-| DP | purple |
-| AGND | orange |
-| AUDIO_R | WHITE |
-| AUDIO_L | BLUE |
-| TX | yellow |
-| RX | GREEN |
-| LINK | brown |
-| PGND | BLACK |
-| +5V | RED |
+<table style="width: 100%; border: none;" cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <td><b>Pin</b></td>
+    <td>DM</td>
+    <td>DP</td>
+    <td>AGND</td>
+    <td>AUDIO_R</td>
+    <td>AUDIO_L</td>
+    <td>TX</td>
+    <td>RX</td>
+    <td>LINK</td>
+    <td>PGND</td>
+    <td>+5V</td>
+  </tr>
+  <tr>
+    <td><b>Color</b></td>
+    <td>pink</td>
+    <td>purple</td>
+    <td>orange</td>
+    <td>WHITE</td>
+    <td>BLUE</td>
+    <td>yellow</td>
+    <td>GREEN</td>
+    <td>brown</td>
+    <td>BLACK</td>
+    <td>RED</td>
+  </tr>
+</table>
 
 ## The text below is currently for firmware version V1.1; working now on updates for V1.7.
 
