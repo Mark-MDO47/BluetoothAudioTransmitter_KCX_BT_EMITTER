@@ -68,6 +68,12 @@
 // Updated version for module KCX_BT_EMITTER v1.7
 //////////////////////////////////////////////////////////////////////////////////////
 
+// Differences between v1.1 and v1.7 that affect this program
+//   The two major differences that require an update to this program are
+//    1. The default baud rate changed
+//    2. The "reset" command spelling changed
+//   There are a lot of new capabilities, but those two prevented the v1.1 program from working with V1.7 hardware.
+//
 // KCX_BT_EMITTER v1.7 list of commands
 //
 // Here is a list of "AT" commands and the responses I have seen. This list is based on the following plus my experimentation
