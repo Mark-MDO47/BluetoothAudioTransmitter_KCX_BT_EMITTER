@@ -14,7 +14,7 @@
 // The KCX_BT_EMITTER module (and some information on it) can be found here: https://www.aliexpress.com/item/33058710334.html
 
 // When running the sketch, you can select steps in any order as follows:
-//     1. Pair with Bluetooth receiver devices (such as speaker, headphones, etc.)
+//     1. Scan for Bluetooth receiver devices (such as speaker, headphones, etc.)
 //     2. Display stored auto-connect Bluetooth receiver devices
 //     3. Add one auto-connect Bluetooth receiver devices to storage
 //     4. Delete all auto-connect Bluetooth receiver devices from storage
@@ -384,7 +384,7 @@ char cmd_bld_ADDLINKNAME[64];  // must build these in RAM from user input
 char const *cmdsPair[] = { cmd_AT, cmd_RESET, cmd_AT, cmd_PAIR };
 char const *cmdsScan[] = { cmd_AT, cmd_RESET, cmd_AT, cmd_SCAN };
 char const *cmdsDispRAM[] = { cmd_AT, cmd_VMLINK_RD };
-char const *cmdsStatus[] = { cmd_AT, cmd_GMR_RD, cmd_BAUD_RD, cmd_STATUS_RD };
+char const *cmdsStatus[] = { cmd_AT, cmd_GMR_RD, cmd_BAUD_RD, cmd_BT_MODE_RD, cmd_AUD_CH_RD, cmd_BT_NAME_RD, cmd_BT_MAC_RD, cmd_VOL_RD, cmd_STATUS_RD };
 char const *cmdsAddRAM[] = { cmd_AT, cmd_DISCON, cmd_VMLINK_RD, cmd_bld_ADDLINKADD, cmd_bld_ADDLINKNAME, cmd_RESET, cmd_AT, cmd_VMLINK_RD };
 char const *cmdsClearRAM[] = { cmd_AT, cmd_DISCON, cmd_DELVMLINK, cmd_RESET, cmd_AT, cmd_VMLINK_RD };
 char const *cmdsDiscon[] = { cmd_AT, cmd_DISCON };
