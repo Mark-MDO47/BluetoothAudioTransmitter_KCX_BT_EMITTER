@@ -180,7 +180,13 @@ void setup() {
   Serial.println();
   Serial.println(F("Bluetooth testing init..."));
 
+  pinMode(DPIN_BLUESRL_RX, INPUT);
+  pinMode(DPIN_BLUESRL_TX, OUTPUT);
+  myBlueSerial.begin(115200); // this is control for Bluetooth module (KCX_BT_EMITTER)
+  // set device baud rate to 9600
+  myBlueSerial.println("AT+BAUD=0");
   myBlueSerial.begin(9600); // this is control for Bluetooth module (KCX_BT_EMITTER)
+  Serial.println(F(" completed!"));
 
 }  // end setup()
 
@@ -287,7 +293,7 @@ unsigned int reportBlueCom() {
 void sendBlueCmd( char * cmd ) {
   int loopIdx;
   // Serial.println(cmd); // send this before sending to device
-  myBlueSerial.print(cmd);
+  myBlueSerial.println(cmd);
   for (loopIdx = 0; loopIdx < NUMWAIT; loopIdx += 1) {
     reportBlueCom();
     delay(5);

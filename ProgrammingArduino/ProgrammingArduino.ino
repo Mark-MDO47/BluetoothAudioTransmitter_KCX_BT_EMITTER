@@ -350,7 +350,7 @@
 SoftwareSerial myBlueSerial(DPIN_BLUESRL_RX, DPIN_BLUESRL_TX);  // to talk to Bluetooth
 
 
-#define NUMWAIT 500  // loopcount waiting for response from Bluetooth module
+#define NUMWAIT 3000  // loopcount waiting for response from Bluetooth module
 
 #define NUMOF(a) (sizeof((a)) / sizeof(*(a)))
 
@@ -374,7 +374,7 @@ char const *cmd_VOL_RD = "AT+VOL?";
 char const *cmd_VOL = "AT+VOL="; // range: 00-31 ?must be exactly 2 characters?
 char const *cmd_TOGGLE_PLAY_PAUSE = "AT+PAUSE";
 char const *cmd_PAIR = "AT+PAIR";
-char const *cmd_SCAN = "AT+SCAN";
+// char const *cmd_SCAN = "AT+SCAN"; // GETS AN ERROR
 char const *cmd_DISCON = "AT+DISCON";
 char const *cmd_ADDLINKADD = "AT+ADDLINKADD=";  // NOTE: must be exactly 12 characters for hex string
 char const *cmd_ADDLINKNAME = "AT+ADDLINKNAME=";
@@ -388,15 +388,15 @@ char cmd_bld_ADDLINKNAME[64];  // must build these in RAM from user input
 #define CMD_MAX (CMD_COUNT-1)
 
 char const *cmdsPair[] = { cmd_AT, cmd_RESET, cmd_AT, cmd_PAIR };
-char const *cmdsScan[] = { cmd_AT, cmd_RESET, cmd_AT, cmd_SCAN };
+char const *cmdsScan[] = { cmd_AT, cmd_RESET, cmd_AT, cmd_AT, cmd_AT };
 char const *cmdsDispRAM[] = { cmd_AT, cmd_VMLINK_RD };
-char const *cmdsStatus[] = { cmd_AT, cmd_GMR_RD, cmd_BAUD_RD, cmd_BT_MODE_RD, cmd_AUD_CH_RD, cmd_BT_NAME_RD, cmd_BT_MAC_RD, cmd_VOL_RD, cmd_STATUS_RD };
+char const *cmdsXmtStatus[] = { cmd_AT, cmd_GMR_RD, cmd_BAUD_RD, cmd_BT_MODE_RD, cmd_AUD_CH_RD, /* cmd_BT_NAME_RD, cmd_BT_MAC_RD, */ cmd_VOL_RD, cmd_STATUS_RD };
 char const *cmdsAddRAM[] = { cmd_AT, cmd_DISCON, cmd_VMLINK_RD, cmd_bld_ADDLINKADD, cmd_bld_ADDLINKNAME, cmd_RESET, cmd_AT, cmd_VMLINK_RD };
 char const *cmdsClearRAM[] = { cmd_AT, cmd_DISCON, cmd_DELVMLINK, cmd_RESET, cmd_AT, cmd_VMLINK_RD };
 char const *cmdsDiscon[] = { cmd_AT, cmd_DISCON };
 char const *cmdsPowerOff[] = { cmd_AT, cmd_PWROFF };
 
-char const *menuOptions[CMD_COUNT] = { "\n0=SCAN", "\n1=PAIR", "\n2=DISPLAY", "\n3=ADD", "\n4=DELETE ALL", "\n5=STATUS", "\n6=Disconnect", "\n7=PowerOff module" };
+char const *menuOptions[CMD_COUNT] = { "\n0=PAIR", "\n1=SCAN", "\n2=DISPLAY", "\n3=ADD", "\n4=DELETE ALL", "\n5=STATUS", "\n6=Disconnect", "\n7=PowerOff module" };
 
 void setup() {
 
@@ -406,7 +406,14 @@ void setup() {
   }
   Serial.println();
   Serial.print(F("Bluetooth Programming Arduino init..."));
-  myBlueSerial.begin(115200);  // this is control for Bluetooth module (KCX_BT_EMITTER)
+
+  pinMode(DPIN_BLUESRL_RX, INPUT);
+  pinMode(DPIN_BLUESRL_TX, OUTPUT);
+  // set device baud rate to 9600
+  myBlueSerial.begin(115200); // this is control for Bluetooth module (KCX_BT_EMITTER)
+  myBlueSerial.println("AT+BAUD=0");
+  delay(5);
+  myBlueSerial.begin(9600); // this is control for Bluetooth module (KCX_BT_EMITTER)
   Serial.println(F(" completed!"));
 
 }  // end setup()
@@ -422,9 +429,9 @@ void loop() {
     Serial.println(F("   2 - Display stored auto-connect Bluetooth receiver devices"));
     Serial.println(F("   3 - Add one auto-connect Bluetooth receiver device to storage"));
     Serial.println(F("   4 - Delete all auto-connect Bluetooth receiver devices from storage"));
-    Serial.println(F("   5 - Current status"));
+    Serial.println(F("   5 - Current XMTR status"));
     Serial.println(F("   6 - BT Disconnect"));
-    Serial.println(F(".  7 - PowerOff module"));
+    Serial.println(F("   7 - PowerOff module"));
     Serial.print(F("==> "));
   }
 
@@ -490,8 +497,8 @@ void processCommand(uint8_t theChoice) {
       sendBlueCmds(cmdsClearRAM, (uint8_t)NUMOF(cmdsClearRAM));
       loopReportBlueCom();
       break;
-    case 5:  // 5 - Show current status");
-      sendBlueCmds(cmdsStatus, (uint8_t)NUMOF(cmdsStatus));
+    case 5:  // 5 - Show current XMTR status");
+      sendBlueCmds(cmdsXmtStatus, (uint8_t)NUMOF(cmdsXmtStatus));
       loopReportBlueCom();
       break;
     case 6:  // 6 - Disconnect current BT");
@@ -694,7 +701,6 @@ void testEcho() {
   static unsigned int idx = 0;
   static unsigned int odx = 0;
   static unsigned int edx = 0;
-  int loopIdx;
 
   while (Serial.available()) {
     mychar = Serial.read();       // this side is faster
@@ -783,12 +789,12 @@ unsigned int reportBlueCom() {
   while (myBlueSerial.available()) {
     inBytes[idx++] = myBlueSerial.read();
   }
-  if (idx > 0) {
-    odx = 0;
-    for (odx = 0; odx < idx; odx += 1) {
-      Serial.print(inBytes[odx]);
+  while (odx < idx) {
+    Serial.print(inBytes[odx++]);
+    while (myBlueSerial.available()) {
+      inBytes[idx++] = myBlueSerial.read();
     }
-  }  // if anything received from Bluetooth chip
+  }
   return (idx);
 }  // end reportBlueCom()
 
@@ -798,11 +804,11 @@ unsigned int reportBlueCom() {
 //    Returns number of characters seen on the last loop
 //
 unsigned int loopReportBlueCom() {
-  int loopIdx;
   unsigned int numBytes;
-  for (loopIdx = 0; loopIdx < NUMWAIT; loopIdx += 1) {
+  unsigned long finishMillis = millis()+NUMWAIT;
+
+  while (millis() < finishMillis) {
     numBytes = reportBlueCom();
-    delay(5);
   }
   return (numBytes);
 }  // end loopReportBlueCom()
