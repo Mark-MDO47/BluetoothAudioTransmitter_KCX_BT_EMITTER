@@ -1,5 +1,5 @@
 # BluetoothAudioTransmitter_KCX_BT_EMITTER
-# This is the KCX_BT_EMITTER_V1.7
+# This is the KCX_BT_EMITTER_V1.7 Branch
 Utilities to help program the KCX_BT_EMITTER module. Collected here to make them easier to find.
 
 ## Go to the branch for the firmware version of KCX_BT_EMITTER: KCX_BT_EMITTER_V1.1 or KCX_BT_EMITTER_V1.7
@@ -14,11 +14,17 @@ There are now two branches to this repo:
 - https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/tree/KCX_BT_EMITTER_V1.1 - works with firmware V1.1 and based on everything from before the pull request
 - https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/tree/KCX_BT_EMITTER_V1.7 - works with firmware V1.7, based on Holger's code, and will be under development
 
-My V1.7 parts are expected to arrive in the middle of July 2023 so in the meantime I won't be able to experiment much with the KCX_BT_EMITTER_V1.7 branch; please bear with me.
+### Differences from V1.1 to V1.7
 
 Looking over the spec, there are a lot of new capabilities in V1.7 but two changes that make the V1.1 version of ProgrammingArduino.ino not work with V1.7 hardware
 - The default baud rate changed from 9600 to 115200
 - The "reset" command spelling changed from "AT+REST" to "AT+RESET"
+
+My V1.7 parts arrived and I have started experimenting.
+- I confirmed Holger's finding that the "AT+SCAN" command in the documentation does not work
+- It was quite difficult to make the code reliably echo the KCX_BT_EMITTER at the default baud rate of 115200. I made the startup of KCX_putty.ino and ProgrammingArduino.ino send a command at 115200 baud to switch to 9600 baud and then the code also switches to 9600 baud.
+
+The latest versions of the KCX_BT_EMITTER_V1.7 code can perform the same functions as the previous V1.1 code. I am working on updating the documentation.
 
 ## KCX_putty
 
