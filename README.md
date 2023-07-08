@@ -14,7 +14,7 @@ There are now two branches to this repo:
 - https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/tree/KCX_BT_EMITTER_V1.1 - works with firmware V1.1 and based on everything from before the pull request
 - https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/tree/KCX_BT_EMITTER_V1.7 - works with firmware V1.7, based on Holger's code, and will be under development
 
-My V1.7 parts are expected to arrive in the middle of July 2023 so in the meantime I won't be able to experiment much with the KCX_BT_EMITTER_V1.7 branch; please bear with me. 
+I am just starting to experiment with the new V1.7 parts and updating the KCX_BT_EMITTER_V1.7 branch; please bear with me. 
 
 ## KCX_putty
 
