@@ -98,7 +98,7 @@ That is why I used a cheap Arduino Uno or Arduino Nano clone, which seems to me 
 
 ## How to use ProgrammingArduino
 The following document describes using this capability:
-- https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/master/ProgrammingArduino_SerialMonitor_SampleOutput.pdf
+- https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/master/ProgrammingArduino_SerialMonitor_SampleOutput_V1.7.pdf
 
 Information on the Bluetooth audio transmitter module is found here (along with ordering info)
 - https://www.aliexpress.com/item/33058710334.html
