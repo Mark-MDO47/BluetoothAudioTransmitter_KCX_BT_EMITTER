@@ -22,7 +22,7 @@ Looking over the spec, there are a lot of new capabilities in V1.7 but two chang
 
 My V1.7 parts arrived and I have started experimenting.
 - I confirmed Holger's finding that the "AT+SCAN" command in the documentation does not work.
-- It was quite difficult to make the code reliably echo the KCX_BT_EMITTER at the default baud rate of 115200. I made the startup of KCX_putty.ino and ProgrammingArduino.ino send a command at 115200 baud to switch to 9600 baud and then the code also switches to its KCX communication 9600 baud while maintining USB Serial Monitor communication at 115200. This worked more reliably.
+- It was quite difficult to make the code reliably echo the V1.7 KCX_BT_EMITTER at its default baud rate of 115200. I made the startup of KCX_putty.ino and ProgrammingArduino.ino send a command at 115200 baud to switch to 9600 baud and then the code also switches to its KCX communication to 9600 baud while maintining USB Serial Monitor communication at 115200. This worked more reliably.
 - **WARNING** In an experiment I tried programming the VLMINK area with a byte-reversed MAC address (0xf44efdecd39d). Afterwards the KCX_BT_EMITTER continued to report SCAN results but does not seem to respond to any commands. I am not sure if this is because of the strange MAC address or if I burned out the chip somehow; just be warned.
 
 The latest versions of the KCX_BT_EMITTER_V1.7 code can perform the same functions as the previous V1.1 code. I am working on updating the documentation.
