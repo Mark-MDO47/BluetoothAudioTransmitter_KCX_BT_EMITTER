@@ -46,7 +46,7 @@ Note: The V1.1 utilities were originally developed by me for the Rubber Band Gun
 There is a start on V1.7 utilities. The following have been updated to some extent:
 - ProgrammingArduino.ino - just enough changes to make it work with V1.7. It doesn't yet access all the V1.7 firmware capabilities.
 
-It took me a while to find sources for the V1.7 version. Here are two sources I found.
+It took me a while to find sources to purchase the V1.7 version. Here are two sources I found.
 - https://store.siqma.com/kcx-bt-emitter.html
 - https://www.aliexpress.us/item/3256805363984973.html
 
@@ -100,15 +100,10 @@ That is why I used a cheap Arduino Uno or Arduino Nano clone, which seems to me 
 ## How to use ProgrammingArduino
 The following document describes using this capability:
 - https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/KCX_BT_EMITTER_V1.7/ProgrammingArduino_SerialMonitor_SampleOutput_V1.7.pdf
+- **WARNING** In an experiment I tried programming the VLMINK area with a byte-reversed MAC address (0xf44efdecd39d). Afterwards the KCX_BT_EMITTER continued to report SCAN results but does not seem to respond to any commands. I am not sure if this is because of the strange MAC address or if I burned out the chip somehow; just be warned.
 
-Information on the Bluetooth audio transmitter module is found here (along with ordering info)
-- https://www.aliexpress.com/item/33058710334.html
+Best information on the V1.7 KCX_BT_EMITTER Bluetooth module I have is here (thanks Holger!)
+- https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/KCX_BT_EMITTER_V1.7/specs/BT%20GY19733-CN.zh-CN.en.pdf
 
-Best information on the Bluetooth module I could find is here; need to translate from Chinese (see next link)
-- https://item.taobao.com/item.htm?spm=a21wu.12321156-tw.0.0.7e76d1c7xEOcFZ&id=570274835710
-
-Some more usage info on the Bluetooth module, especially English information on controlling with serial AT commands
-- https://www.electro-tech-online.com/threads/kcx_bt_emitter-low-cost-bluetooth-bt-audio-module.158156/
-
-Look in the comments in ProgrammingArduino.ino to see my interpretation of the AT commands
+Look in the comments in the V1.7 ProgrammingArduino.ino to see my interpretation of the AT commands
 - https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/master/ProgrammingArduino/ProgrammingArduino.ino
