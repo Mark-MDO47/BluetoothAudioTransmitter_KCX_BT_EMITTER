@@ -1,5 +1,5 @@
 # BluetoothAudioTransmitter_KCX_BT_EMITTER
-# This is the master branch; code is original KCX_BT_EMITTER_V1.7
+# This is the master branch; code is original V1.7 pull; later code in _V1.7
 Utilities to help program the KCX_BT_EMITTER module. Collected here to make them easier to find.
 
 ## Go to the branch for the firmware version of KCX_BT_EMITTER: KCX_BT_EMITTER_V1.1 or KCX_BT_EMITTER_V1.7
