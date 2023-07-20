@@ -14,6 +14,8 @@ There are now two branches to this repo:
 - https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/tree/KCX_BT_EMITTER_V1.1 - works with firmware V1.1 and based on everything from before the pull request
 - https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/tree/KCX_BT_EMITTER_V1.7 - works with firmware V1.7, based on Holger's code, and will be under development
 
+I have done some development after the original pull request and this branch reflects that.
+
 ### Differences from V1.1 to V1.7
 
 Looking over the spec, there are a lot of new capabilities in V1.7 but two changes that make the V1.1 version of ProgrammingArduino.ino not work with V1.7 hardware
