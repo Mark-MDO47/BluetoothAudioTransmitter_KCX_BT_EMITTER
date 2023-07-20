@@ -19,6 +19,7 @@ I am just starting to experiment with the new V1.7 parts and updating the KCX_BT
 ## KCX_putty
 
 This tool is designed to help explore the commands of the new V1.7 KCX_BT_EMITTER.
+- https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/KCX_BT_EMITTER_V1.1/KCX_putty/KCX_putty.ino
 
 The purpose of KCX_putty.ino is to be loaded in an Arduino connected
 the same as the "Programming Arduino" and act like a "dumb" terminal
@@ -66,4 +67,4 @@ Some more usage info on the Bluetooth module, especially English information on 
 - https://www.electro-tech-online.com/attachments/atwithsomeenglish-jpg.122398/
 
 Look in the comments in ProgrammingArduino.ino to see my interpretation of the AT commands
-- https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/master/ProgrammingArduino/ProgrammingArduino.ino
+- https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/blob/KCX_BT_EMITTER_V1.1/ProgrammingArduino/ProgrammingArduino.ino
