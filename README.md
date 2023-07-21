@@ -56,7 +56,7 @@ The following document describes using this capability:
 Information on the Bluetooth audio transmitter module is found here (along with ordering info)
 - https://www.aliexpress.com/item/33058710334.html
 
-Best information on the Bluetooth module I could find is here; need to translate from Chinese (see next link)
+Best information on the V1.1 Bluetooth module I could find is here; need to translate from Chinese (see next link)
 - https://item.taobao.com/item.htm?spm=a21wu.12321156-tw.0.0.7e76d1c7xEOcFZ&id=570274835710
 
 An Instructable that includes the V1.1 KCX_BT_EMITTER
