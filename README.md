@@ -8,13 +8,11 @@ This code was originally done for KCX_BT_EMITTER firmware V1.1 (found on modules
 There is now a version V1.7 of the KCX_BT_EMITTER and Holger Pandel made some changes to ProgrammingArduino.ino in his fork in branch v1.7 to accomodate the new AT commands. This can be found here
 - https://github.com/pandel/BluetoothAudioTransmitter_KCX_BT_EMITTER/tree/v1.7
 
-Holger kindly did a pull request to alert me to this update, and I will merge that code in.
+Holger kindly did a pull request to alert me to this update, and I merged that code in.
 
 There are now two branches to this repo:
 - https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/tree/KCX_BT_EMITTER_V1.1 - works with firmware V1.1 and based on everything from before the pull request
-- https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/tree/KCX_BT_EMITTER_V1.7 - works with firmware V1.7, based on Holger's code, and will be under development
-
-My V1.7 parts are expected to arrive in the middle of July 2023 so in the meantime I won't be able to experiment much with the KCX_BT_EMITTER_V1.7 branch; please bear with me. 
+- https://github.com/Mark-MDO47/BluetoothAudioTransmitter_KCX_BT_EMITTER/tree/KCX_BT_EMITTER_V1.7 - works with firmware V1.7, based on Holger's code, seems to work
 
 ## KCX_putty
 
